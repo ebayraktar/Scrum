@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTaskContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            app:cardBackgroundColor="@color/colorOrange"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/titleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/task_name"
+                android:textColor="@color/colorWhite" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cvTitle">
+
+            <View
+                android:id="@+id/viewStatus"
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorOrange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TableLayout
+                    android:id="@+id/tlContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1,2"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TableRow android:layout_marginTop="@dimen/task_item_margin_top">
+
+                        <ImageView
+                            android:id="@+id/ivProject"
+                            android:layout_width="36dp"
+                            android:layout_height="@dimen/task_icon_height"
+                            android:src="@drawable/ic_menu_projects" />
+
+
+                        <TextView
+                            android:id="@+id/tvProject"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:layout_span="2"
+                            android:text="@string/project_name" />
+
+                        <ImageView
+                            android:id="@+id/ivConstituent"
+                            android:layout_width="36dp"
+                            android:layout_height="@dimen/task_icon_height"
+                            android:layout_column="3"
+                            android:src="@drawable/ic_menu_account" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginTop="@dimen/task_item_margin_top">
+
+                        <ImageView
+                            android:id="@+id/ivDate"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/task_icon_height"
+                            android:src="@drawable/ic_calendar" />
+
+                        <TextView
+                            android:id="@+id/tvStartDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:text="01/01/2000" />
+
+
+                        <TextView
+                            android:id="@+id/tvDeadline"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:text="01/01/2000" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvStatus"
+                    android:layout_width="96dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="@dimen/task_item_margin_top"
+                    app:cardBackgroundColor="@color/colorOrange"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tlContent">
+
+                    <TextView
+                        android:id="@+id/tvStatus"
+                        style="@style/bodyTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/menu_pending"
+                        android:textColor="@color/colorWhite" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">Scrum</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="menu_main">Ana Sayfa</string>
+    <string name="menu_projects">Projelerim</string>
+    <string name="menu_tasks">Görevlerim</string>
+    <string name="menu_notifications">Bildirimler</string>
+    <string name="menu_account">Hesap</string>
+    <string name="menu_help">Yardım</string>
+    <string name="menu_about">Hakkında</string>
+
+    <string name="menu_project_detail">Proje Detayı</string>
+
+    <string name="menu_data_policy">Veri Politikası</string>
+    <string name="menu_terms_of_use">Kullanım Sözleşmesi</string>
+    <string name="menu_open_source_libraries">Açık Kaynak Kütüphaneler</string>
+
+
+    <string name="nav_header_title">Scrum Mobil Uygulama</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="settings">Ayarlar</string>
+    <string name="menu_report_problem">Sorun Bildir</string>
+    <string name="menu_help_center">Yardım Merkezi</string>
+    <string name="menu_pending">Bekliyor</string>
+    <string name="menu_active">Aktif</string>
+    <string name="menu_completed">Tamamlandı</string>
+    <string name="menu_suspended">Askıya Alındı</string>
+    <string name="user_full_name">Tam Ad</string>
+    <string name="user_job_title">Görev</string>
+    <string name="user_about">Hakkında</string>
+    <string name="change_password">Parola Değişikliği</string>
+    <string name="edit_profile">Düzenle</string>
+    <string name="membership_date">Üyelik Tarihi</string>
+    <string name="birth_date">Doğum Tarihi</string>
+    <string name="location">Konum</string>
+    <string name="add_bio">Profiline bir biyografi ekle</string>
+    <string name="add_job_title">Profiline bir görev ekle</string>
+    <string name="save">Kaydet</string>
+    <string name="todo">todo</string>
+    <string name="account_edit">Hesabı Düzenle</string>
+    <string name="tasks">Görevler</string>
+    <string name="close_all">Hepsini kapat</string>
+    <string name="projects">Projeler</string>
+    <string name="item">Item</string>
+    <string name="project_name">Proje Adı</string>
+    <string name="task_name">Görev Adı</string>
+
+    <string name="url_data_policy">https://scrum-aabe7.web.app/privacypolicy.html</string>
+    <string name="url_open_source_libraries">https://scrum-aabe7.web.app/opensourcelibraries.html</string>
+    <string name="url_scrum">https://scrum-aabe7.web.app/about.html</string>
+    <string name="url_terms_of_use">https://scrum-aabe7.web.app/termsofuse.html</string>
+
+    <string name="url_help_center">https://scrum-aabe7.web.app/helpcenter.html</string>
+    <string name="url_report_problem">https://scrum-aabe7.web.app/reportproblem.html</string>
+
+    <string name="comment">Yorum yap</string>
+    <string name="attach_file">Dosya Ekle</string>
+    <string name="no_task_history">Görev Geçmişi Bulunamadı</string>
+    <string name="no_comment">Yorum Bulunamadı</string>
+    <string name="send">Gönder</string>
+    <string name="privacy_mode">Gizlilik Modu</string>
+    <string name="no_project">Proje Bulunamadı</string>
+    <string name="privacy_public">Genel</string>
+    <string name="privacy_private">Özel</string>
+    <string name="no_task">Görev Bulunamadı</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_task">Yeni Görev</string>
+    <string name="login">Giriş Yap</string>
+    <string name="details">Detaylar</string>
+    <string name="send_invitation">Katılma Başvurusu</string>
+    <string name="applied">Başvuruldu</string>
+    <string name="menu_login">Giriş Yap</string>
+    <string name="menu_register">Kayıt Ol</string>
+    <string name="email">Eposta</string>
+    <string name="password">Parola</string>
+
+    <string name="notification_channel">Bildirim kanalı</string>
+    <string name="password_confirm">Parola Tekrar</string>
+    <string name="logout">Çıkış</string>
+    <string name="new_project">Yeni Proje</string>
+    <string name="constituent">Proje Sahibi</string>
+    <string name="start_date">Başlangıç Tarihi</string>
+    <string name="deadline">Bitiş Tarihi</string>
+    <string name="task_description">Görev Açıklaması</string>
+    <string name="task_status">Görev Durumu</string>
+    <string name="task_priority">Görev Önceliği</string>
+    <string name="loading">Yükleniyor</string>
+    <string name="edit">Düzenle</string>
+    <string name="delete">Sil</string>
+    <string name="menu_applications">Başvuruları Gör</string>
+    <string name="delete_project">Projeyi Sil</string>
+    <string name="edit_project">Projeyi Düzenle</string>
+    <string name="no_application">Başvuru Bulunamadı</string>
+    <string name="about_app">Uygulama Hakkında</string>
+    <string name="edit_task">Görevi Düzenle</string>
+    <string name="delete_task">Görevi Sil</string>
+    <string name="task_constituent">Oluşturan</string>
+    <string name="task_history">Görev Geçmişi</string>
+    <string name="comments">Yorumlar</string>
+
+    <string-array name="task_priorities">
+        <item>Normal</item>
+        <item>Düşük</item>
+        <item>Yüksek</item>
+    </string-array>
+
+    <string-array name="task_status">
+        <item>Beklemede</item>
+        <item>Aktif</item>
+        <item>Tamamlandı</item>
+        <item>Askıda</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clNewProject"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.project.add.ProjectAddFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvConstituent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProjectName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="64dp"
+                android:hint="@string/project_name"
+                app:errorEnabled="true"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietProjectName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/ivProject"
+                android:layout_width="64dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/todo"
+                android:padding="8dp"
+                android:src="@drawable/ic_menu_projects"
+                app:layout_constraintBottom_toBottomOf="@id/tilProjectName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tilProjectName" />
+
+
+            <TextView
+                android:id="@+id/tvPrivacyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/privacy_mode"
+                app:layout_constraintTop_toBottomOf="@id/ivProject" />
+
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swcPrivacyMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/fab_margin"
+                android:gravity="center"
+                android:text="Genel"
+                app:layout_constraintTop_toBottomOf="@id/tvPrivacyText" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilInvitation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/fab_margin"
+                android:hint="Davetli Epostası"
+                android:visibility="gone"
+                app:errorEnabled="true"
+                app:layout_constraintTop_toBottomOf="@id/swcPrivacyMode">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietInvitation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ListView
+        android:id="@+id/lvInvitation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvConstituent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

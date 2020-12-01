@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvUserProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorLime"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clUserProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <ImageView
+                android:id="@+id/ivUserImage"
+                android:layout_width="96dp"
+                android:layout_height="128dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_menu_account"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvFullName"
+                style="@style/titleTV"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toStartOf="@id/cvProjects"
+                app:layout_constraintStart_toEndOf="@id/ivUserImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvUserJobTitle"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:padding="4dp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toStartOf="@id/cvProjects"
+                app:layout_constraintStart_toEndOf="@id/ivUserImage"
+                app:layout_constraintTop_toBottomOf="@id/tvFullName" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                style="@style/bodyTV"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:padding="4dp"
+                android:textColor="@color/colorDarkGrey"
+                app:layout_constraintEnd_toStartOf="@id/cvProjects"
+                app:layout_constraintStart_toEndOf="@id/ivUserImage"
+                app:layout_constraintTop_toBottomOf="@id/tvUserJobTitle" />
+
+            <TextView
+                android:id="@+id/tvBirthDate"
+                style="@style/bodyTV"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:padding="4dp"
+                android:textColor="@color/colorDarkGrey"
+                app:layout_constraintEnd_toStartOf="@id/cvProjects"
+                app:layout_constraintStart_toEndOf="@id/ivUserImage"
+                app:layout_constraintTop_toBottomOf="@id/tvLocation" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvProjects"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/colorYellow"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toTopOf="@id/cvTasks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvProjects"
+                    style="@style/bodyTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="4dp"
+                    android:text="@string/projects"
+                    android:textColor="@color/colorDarkGrey" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvTasks"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/colorYellow"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toTopOf="@id/cvAccount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvProjects">
+
+                <TextView
+                    android:id="@+id/tvTasks"
+                    style="@style/bodyTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="4dp"
+                    android:text="@string/tasks"
+                    android:textColor="@color/colorDarkGrey" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAccount"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/colorYellow"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvTasks">
+
+                <TextView
+                    android:id="@+id/tvAccount"
+                    style="@style/bodyTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="4dp"
+                    android:text="@string/menu_account"
+                    android:textColor="@color/colorDarkGrey" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Projelere katılabilmek için giriş yapmalısınız."
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cvLogin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvLogin"
+                android:layout_width="128dp"
+                android:layout_height="64dp"
+                app:cardBackgroundColor="@color/colorYellow"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/titleTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/login" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvNoProject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_project"
+        android:textStyle="italic"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvUserProfile" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProjectList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvUserProfile"
+        tools:listitem="@layout/list_item_main" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/av_splash_animation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvUserProfile"
+        app:lottie_autoPlay="true"
+        app:lottie_fallbackRes="@color/colorPrimary"
+        app:lottie_fileName="loading.json"
+        app:lottie_loop="true" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

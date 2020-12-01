@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_main">
+
+    <fragment
+        android:id="@+id/nav_main"
+        android:name="com.bayraktar.scrum.ui.main.MainFragment"
+        android:label="@string/menu_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_nav_main_to_nav_projects"
+            app:destination="@id/nav_projects" />
+        <action
+            android:id="@+id/action_nav_main_to_nav_tasks"
+            app:destination="@id/nav_tasks" />
+        <action
+            android:id="@+id/action_nav_main_to_nav_account"
+            app:destination="@id/nav_account" />
+        <action
+            android:id="@+id/action_nav_main_to_nav_login"
+            app:destination="@id/nav_login" />
+        <action
+            android:id="@+id/action_nav_main_self"
+            app:destination="@id/nav_main"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.bayraktar.scrum.ui.account.LoginFragment"
+        android:label="@string/menu_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_nav_login_to_nav_main"
+            app:destination="@id/nav_main"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_login_to_nav_register"
+            app:destination="@id/nav_register" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="com.bayraktar.scrum.ui.account.RegisterFragment"
+        android:label="@string/menu_register"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_nav_register_to_nav_login"
+            app:destination="@id/nav_login"
+            app:popUpTo="@id/nav_login"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_register_to_nav_main"
+            app:destination="@id/nav_main"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_projects"
+        android:name="com.bayraktar.scrum.ui.project.ProjectFragment"
+        android:label="@string/menu_projects"
+        tools:layout="@layout/fragment_project">
+        <action
+            android:id="@+id/action_nav_projects_to_nav_project_detail"
+            app:destination="@id/nav_project_detail" />
+        <action
+            android:id="@+id/action_nav_projects_to_nav_add_project"
+            app:destination="@id/nav_new_project" />
+        <action
+            android:id="@+id/action_nav_projects_to_nav_main"
+            app:destination="@id/nav_main"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_new_project"
+        android:name="com.bayraktar.scrum.ui.project.add.ProjectAddFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_project_add">
+        <argument
+            android:name="title"
+            android:defaultValue="Yeni Proje"
+            app:argType="string" />
+        <argument
+            android:name="projectID"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_new_project_to_nav_projects"
+            app:destination="@id/nav_projects" />
+        <action
+            android:id="@+id/action_nav_new_project_to_nav_project_detail"
+            app:destination="@id/nav_project_detail"
+            app:popUpTo="@id/nav_project_detail"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_project_detail"
+        android:name="com.bayraktar.scrum.ui.project.detail.ProjectDetailFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_project_detail">
+        <argument
+            android:name="projectID"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_project_detail_to_nav_task_detail"
+            app:destination="@id/nav_task_detail" />
+        <action
+            android:id="@+id/action_nav_project_detail_to_nav_add_task"
+            app:destination="@id/nav_new_task" />
+        <action
+            android:id="@+id/action_nav_project_detail_to_nav_new_project"
+            app:destination="@id/nav_new_project" />
+        <action
+            android:id="@+id/action_nav_project_detail_to_nav_projects"
+            app:destination="@id/nav_projects"
+            app:popUpTo="@id/nav_projects"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_project_detail_to_nav_project_applications"
+            app:destination="@id/nav_project_applications" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_project_applications"
+        android:name="com.bayraktar.scrum.ui.project.applications.ProjectApplicationsFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_project_applications">
+        <argument
+            android:name="projectID"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            android:defaultValue="Başvurular"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_tasks"
+        android:name="com.bayraktar.scrum.ui.task.TaskFragment"
+        android:label="@string/menu_tasks"
+        tools:layout="@layout/fragment_task">
+        <action
+            android:id="@+id/action_nav_tasks_to_nav_task_detail"
+            app:destination="@id/nav_task_detail" />
+        <action
+            android:id="@+id/action_nav_tasks_to_nav_main"
+            app:destination="@id/nav_main"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_task_detail"
+        android:name="com.bayraktar.scrum.ui.task.detail.TaskDetailFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_task_detail">
+        <argument
+            android:name="taskID"
+            app:argType="string" />
+        <argument
+            android:name="projectID"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_task_detail_to_nav_new_task"
+            app:destination="@id/nav_new_task" />
+        <action
+            android:id="@+id/action_nav_task_detail_to_nav_project_detail"
+            app:destination="@id/nav_project_detail"
+            app:popUpTo="@id/nav_project_detail"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_new_task"
+        android:name="com.bayraktar.scrum.ui.task.add.TaskAddFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_task_add">
+        <argument
+            android:name="taskID"
+            app:argType="string" />
+        <argument
+            android:name="projectID"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_new_task_to_nav_project_detail"
+            app:destination="@id/nav_project_detail"
+            app:popUpTo="@id/nav_project_detail"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_new_task_to_nav_task_detail"
+            app:destination="@id/nav_task_detail"
+            app:popUpTo="@id/nav_task_detail"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_notifications"
+        android:name="com.bayraktar.scrum.ui.notifications.NotificationsFragment"
+        android:label="@string/menu_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.bayraktar.scrum.ui.account.AccountFragment"
+        android:label="@string/menu_account"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_nav_account_to_nav_account_edit"
+            app:destination="@id/nav_account_edit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_account_edit"
+        android:name="com.bayraktar.scrum.ui.account.edit.AccountEditFragment"
+        android:label="@string/account_edit"
+        tools:layout="@layout/fragment_account_edit">
+        <action
+            android:id="@+id/action_fragment_account_edit_to_account"
+            app:destination="@id/nav_account"
+            app:popUpTo="@+id/nav_account"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.bayraktar.scrum.ui.help.HelpFragment"
+        android:label="@string/menu_help"
+        tools:layout="@layout/fragment_help">
+        <action
+            android:id="@+id/action_nav_help_to_nav_help_center"
+            app:destination="@id/nav_help_center" />
+        <action
+            android:id="@+id/action_nav_help_to_nav_report_problem"
+            app:destination="@id/nav_report_problem" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_report_problem"
+        android:name="com.bayraktar.scrum.ui.help.reportProblem.ReportProblemFragment"
+        android:label="@string/menu_report_problem"
+        tools:layout="@layout/fragment_report_problem" />
+
+    <fragment
+        android:id="@+id/nav_help_center"
+        android:name="com.bayraktar.scrum.ui.help.helpCenter.HelpCenterFragment"
+        android:label="@string/menu_help_center"
+        tools:layout="@layout/fragment_help_center" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.bayraktar.scrum.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about">
+        <action
+            android:id="@+id/action_nav_about_to_nav_terms_of_use"
+            app:destination="@id/nav_terms_of_use" />
+        <action
+            android:id="@+id/action_nav_about_to_nav_data_policy"
+            app:destination="@id/nav_data_policy" />
+        <action
+            android:id="@+id/action_nav_about_to_nav_open_source_libraries"
+            app:destination="@id/nav_open_source_libraries" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_data_policy"
+        android:name="com.bayraktar.scrum.ui.about.dataPolicy.DataPolicyFragment"
+        android:label="@string/menu_data_policy"
+        tools:layout="@layout/fragment_data_policy" />
+
+    <fragment
+        android:id="@+id/nav_terms_of_use"
+        android:name="com.bayraktar.scrum.ui.about.termsOfUse.TermsOfUseFragment"
+        android:label="@string/menu_terms_of_use"
+        tools:layout="@layout/fragment_terms_of_use" />
+
+    <fragment
+        android:id="@+id/nav_open_source_libraries"
+        android:name="com.bayraktar.scrum.ui.about.openSourceLibraries.OpenSourceLibrariesFragment"
+        android:label="@string/menu_open_source_libraries"
+        tools:layout="@layout/fragment_open_source_libraries" />
+    <fragment
+        android:id="@+id/nav_open_about_app"
+        android:name="com.bayraktar.scrum.ui.about.scrum.ScrumFragment"
+        android:label="@string/about_app"
+        tools:layout="@layout/fragment_scrum" />
+
+
+</navigation>

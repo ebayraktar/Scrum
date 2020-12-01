@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_main" />
+        <item
+            android:id="@+id/nav_projects"
+            android:icon="@drawable/ic_menu_projects"
+            android:title="@string/menu_projects"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_tasks"
+            android:icon="@drawable/ic_menu_tasks"
+            android:title="@string/menu_tasks"
+            android:visible="false" />
+    </group>
+
+    <item android:title="@string/settings">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_notifications"
+                    android:icon="@drawable/ic_menu_notifications"
+                    android:title="@string/menu_notifications"
+                    android:visible="false" />
+
+                <item
+                    android:id="@+id/nav_account"
+                    android:icon="@drawable/ic_menu_account"
+                    android:title="@string/menu_account"
+                    android:visible="false" />
+
+                <item
+                    android:id="@+id/nav_help"
+                    android:icon="@drawable/ic_menu_help"
+                    android:title="@string/menu_help" />
+
+                <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_menu_about"
+                    android:title="@string/menu_about" />
+            </group>
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout"
+            android:visible="false" />
+    </group>
+
+</menu>

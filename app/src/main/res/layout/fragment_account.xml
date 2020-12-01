@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/fab_margin"
+    tools:context=".ui.account.AccountFragment">
+
+    <!-- IMAGE -->
+    <ImageView
+        android:id="@+id/ivUserImage"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/ic_menu_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvEditProfile"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivUserImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivUserImage">
+
+        <TextView
+            style="@style/bodyTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/edit_profile"
+            android:textColor="@android:color/white" />
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivUserImage">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <!-- FULL NAME -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvFullName"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/user_full_name" />
+
+                <TextView
+                    android:id="@+id/tvFullName"
+                    style="@style/titleTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/user_full_name" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- JOB TITLE -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvJobTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/account_item_height"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvFullName">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/user_job_title" />
+
+                <TextView
+                    android:id="@+id/tvJobTitle"
+                    style="@style/bodyTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/add_job_title" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- ABOUT -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAbout"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvJobTitle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/user_about" />
+
+                <TextView
+                    android:id="@+id/tvAbout"
+                    style="@style/bodyTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/add_bio" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- BIRTH DATE -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvBirthDate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/account_item_height"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvAbout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/birth_date" />
+
+                <TextView
+                    android:id="@+id/tvBirthDate"
+                    style="@style/bodyTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="01/01/1900" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- MEMBERSHIP DATE -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvMembershipDate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/account_item_height"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvBirthDate">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/membership_date" />
+
+                <TextView
+                    android:id="@+id/tvMembershipDate"
+                    style="@style/bodyTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="01/01/1900" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- LOCATION -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/account_item_height"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvMembershipDate">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/location" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    style="@style/bodyTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="Istanbul" />
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

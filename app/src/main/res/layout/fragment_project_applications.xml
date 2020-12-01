@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.project.applications.ProjectApplicationsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvApplications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:itemCount="5"
+        tools:listitem="@layout/list_item_applications" />
+
+    <TextView
+        android:id="@+id/tvNoApplication"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_application"
+        android:textStyle="italic"
+        android:visibility="gone" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/av_splash_animation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fallbackRes="@color/colorPrimary"
+        app:lottie_fileName="loading.json"
+        app:lottie_loop="true" />
+
+</FrameLayout>

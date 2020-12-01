@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivProject"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_menu_projects"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvProject"
+        style="@style/titleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:gravity="center"
+        android:text="@string/project_name"
+        app:layout_constraintTop_toBottomOf="@id/ivProject" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvConstituent"
+        app:cardCornerRadius="4dp"
+        android:layout_width="match_parent"
+        app:cardElevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        app:layout_constraintTop_toBottomOf="@id/tvProject">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/tvDescription1"
+                style="@style/bodyTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Oluşturan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivConstituent"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_menu_account"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription1" />
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/user_full_name"
+                app:layout_constraintStart_toEndOf="@id/ivConstituent"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription1" />
+
+            <TextView
+                android:id="@+id/tvJobTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/user_job_title"
+                app:layout_constraintStart_toEndOf="@id/ivConstituent"
+                app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/location"
+                app:layout_constraintStart_toEndOf="@id/ivConstituent"
+                app:layout_constraintTop_toBottomOf="@id/tvJobTitle" />
+
+            <TextView
+                android:id="@+id/tvDateText"
+                style="@style/bodyTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Oluşturulma Tarihi"
+                app:layout_constraintEnd_toStartOf="@id/tvDateValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivConstituent" />
+
+            <TextView
+                android:id="@+id/tvDateValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="01/01/2000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvDateText"
+                app:layout_constraintTop_toBottomOf="@id/ivConstituent" />
+
+            <TextView
+                android:id="@+id/tvMemberText"
+                style="@style/bodyTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Üye Sayısı"
+                app:layout_constraintEnd_toStartOf="@id/tvMemberValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDateText" />
+
+            <TextView
+                android:id="@+id/tvMemberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvMemberText"
+                app:layout_constraintTop_toBottomOf="@id/tvDateText" />
+
+            <TextView
+                android:id="@+id/tvInvitationText"
+                style="@style/bodyTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Bekleyen Davetli Sayısı"
+                app:layout_constraintEnd_toStartOf="@id/tvInvitationValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMemberText" />
+
+            <TextView
+                android:id="@+id/tvInvitationValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvInvitationText"
+                app:layout_constraintTop_toBottomOf="@id/tvMemberText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cvConstituent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/fab_margin"
+            android:layout_marginBottom="24dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="@dimen/fab_margin"
+                app:layout_constraintEnd_toStartOf="@id/cvApply"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/titleTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:text="İptal"
+                    android:textColor="@color/colorWhite" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvApply"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="@dimen/fab_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cvCancel"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvApply"
+                    style="@style/titleTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:text="Başvur"
+                    android:textColor="@color/colorWhite" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

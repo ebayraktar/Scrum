@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="bottom_navigation_view">
+
+    <item
+        android:id="@+id/navigation_pending"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="@color/colorOrange"
+        android:title="@string/menu_pending"
+        android:titleCondensed="@string/menu_pending" />
+
+    <item
+        android:id="@+id/navigation_active"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:iconTint="@color/colorGreen"
+        android:title="@string/menu_active"
+        android:titleCondensed="@string/menu_active" />
+
+    <item
+        android:id="@+id/navigation_completed"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:iconTint="@color/colorDarkGrey"
+        android:title="@string/menu_completed"
+        android:titleCondensed="@string/menu_completed" />
+
+    <item
+        android:id="@+id/navigation_suspended"
+        android:icon="@drawable/ic_menu_tasks"
+        android:iconTint="@color/colorBlue"
+        android:title="@string/menu_suspended"
+        android:titleCondensed="@string/menu_suspended" />
+
+</menu>

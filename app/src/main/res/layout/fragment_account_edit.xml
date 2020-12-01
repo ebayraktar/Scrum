@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/fab_margin"
+    tools:context=".ui.account.edit.AccountEditFragment">
+
+    <ImageView
+        android:id="@+id/ivUserImage"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/ic_menu_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@id/ivUserImage"
+        app:layout_constraintEnd_toEndOf="@id/ivUserImage" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvSave"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivUserImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivUserImage">
+
+        <TextView
+            style="@style/bodyTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textColor="@android:color/white" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivUserImage">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- FULL NAME -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/user_full_name"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="@string/user_full_name" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- JOB TITLE -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvJobTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvFullName">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilJobTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/user_job_title"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="36">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietJobTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="@string/user_job_title" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ABOUT -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvJobTitle">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/user_about"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="240">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietAbout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_about" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- BIRTH DATE -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvBirthDate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/account_item_height"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvAbout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birth_date" />
+
+                <TextView
+                    android:id="@+id/tvBirthDate"
+                    style="@style/bodyTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="01/01/1900" />
+
+                <ImageView
+                    android:id="@+id/ivCalendar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end|center"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_calendar" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- LOCATION -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/cvBirthDate">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/location"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="48">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="@string/location" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

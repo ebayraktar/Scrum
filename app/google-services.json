@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "240549765490",
+    "firebase_url": "https://scrum-aabe7.firebaseio.com",
+    "project_id": "scrum-aabe7",
+    "storage_bucket": "scrum-aabe7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240549765490:android:f26895b4efddfc07c63deb",
+        "android_client_info": {
+          "package_name": "com.bayraktar.scrum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240549765490-mfq9s30c09d45qvcs0bf4jipdrvo834k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bayraktar.scrum",
+            "certificate_hash": "c07f5089fc12df97e173c9a31f9fae04f3ce0d71"
+          }
+        },
+        {
+          "client_id": "240549765490-ou9ikac1fhjt14j07lik033e08un79gl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIpc7DvUUFetXPm7wqxn4Txd30y4M07LM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240549765490-ou9ikac1fhjt14j07lik033e08un79gl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240549765490:android:1f5aff8b3ba3f413",
+        "android_client_info": {
+          "package_name": "com.emrebayraktar.scrum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240549765490-cjec4f6enn59f4uurmrnpf517474072k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emrebayraktar.scrum",
+            "certificate_hash": "c07f5089fc12df97e173c9a31f9fae04f3ce0d71"
+          }
+        },
+        {
+          "client_id": "240549765490-ou9ikac1fhjt14j07lik033e08un79gl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIpc7DvUUFetXPm7wqxn4Txd30y4M07LM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240549765490-ou9ikac1fhjt14j07lik033e08un79gl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
