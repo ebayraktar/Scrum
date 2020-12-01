@@ -8,6 +8,7 @@ import android.os.Build;
 import com.bayraktar.scrum.model.User;
 import com.bayraktar.scrum.service.FirebaseService;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,6 +21,7 @@ public class App extends Application {
     public static FirebaseDatabase firebaseDatabase;
     public static FirebaseService firebaseService;
     public static User currentUser;
+    public static FirebaseAnalytics mFirebaseAnalytics;
 
     public App() {
     }
@@ -33,6 +35,8 @@ public class App extends Application {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseService = new FirebaseService();
         createNotificationChannel();
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     private void createNotificationChannel() {
