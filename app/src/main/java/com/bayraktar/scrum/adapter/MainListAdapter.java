@@ -121,6 +121,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        final CardView cvContent;
+
         final ImageView ivProject;
         final TextView tvProject;
         final TextView tvDate;
@@ -138,6 +140,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         public ViewHolder(@NonNull View itemView, OnMainListListener onMainListListener) {
             super(itemView);
 
+            cvContent = itemView.findViewById(R.id.cvContent);
+
             ivProject = itemView.findViewById(R.id.ivProject);
             tvProject = itemView.findViewById(R.id.tvProject);
             tvDate = itemView.findViewById(R.id.tvDate);
@@ -152,18 +156,19 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
             cvInvitation.setOnClickListener(this);
             cvDetail.setOnClickListener(this);
+            cvContent.setOnClickListener(this);
             this.onMainListListener = onMainListListener;
         }
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.cvInvitation:
-                    onMainListListener.onMainListInvitationClick(v, getAdapterPosition());
-                    break;
-                case R.id.cvDetail:
-                    onMainListListener.onMainListDetailClick(v, getAdapterPosition());
-                    break;
+            int id = v.getId();
+            if (id == R.id.cvInvitation) {
+                onMainListListener.onMainListInvitationClick(v, getAdapterPosition());
+            } else if (id == R.id.cvDetail) {
+                onMainListListener.onMainListDetailClick(v, getAdapterPosition());
+            } else if (id == R.id.cvContent) {
+                onMainListListener.onMainListItemClick(v, getAdapterPosition());
             }
         }
     }
@@ -172,5 +177,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         void onMainListInvitationClick(View v, int position);
 
         void onMainListDetailClick(View v, int position);
+
+        void onMainListItemClick(View v, int position);
     }
 }

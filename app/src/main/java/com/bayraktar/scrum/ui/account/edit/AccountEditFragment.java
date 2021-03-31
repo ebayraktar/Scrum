@@ -1,19 +1,12 @@
 package com.bayraktar.scrum.ui.account.edit;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +15,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import com.bayraktar.scrum.App;
 import com.bayraktar.scrum.BaseActivity;
 import com.bayraktar.scrum.R;
-import com.bayraktar.scrum.ui.project.detail.main.ProjectDetailMainFragment;
-import com.bayraktar.scrum.ui.project.detail.main.ProjectDetailMainViewModel;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +32,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -203,7 +202,17 @@ public class AccountEditFragment extends Fragment implements View.OnClickListene
             currentUser.setLocation(tietLocation.getText().toString());
             firebaseService.setUser(currentUser);
             if (selectedImage != null) {
-                firebaseService.uploadUserImage(currentUser.getUserID(), selectedImage, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                Bitmap bmp = ((BitmapDrawable) ivUserImage.getDrawable()).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                try {
+                    stream.close();
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+                firebaseService.uploadUserImage(currentUser.getUserID(), byteArray, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -228,25 +237,20 @@ public class AccountEditFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode) {
-            case 0:
-                if (resultCode == RESULT_OK) {
-                    Log.d("TAG", "onActivityResult: " + data.getData());
-                    Uri selectedImage = data.getData();
-                    ivUserImage.setImageURI(selectedImage);
-                }
-
-                break;
-            case 1:
-
-                if (data != null) {
-                    Log.d("TAG", "onActivityResult: " + data.getData());
-                }
-                if (resultCode == RESULT_OK) {
+        if (requestCode == 1) {
+            if (data != null) {
+                Log.d("TAG", "onActivityResult: " + data.getData());
+            }
+            if (resultCode == RESULT_OK) {
+                try {
                     selectedImage = data.getData();
-                    ivUserImage.setImageURI(selectedImage);
+                    Bitmap bmp = App.decodeUri(getContext(), data.getData(), 200);
+                    if (bmp != null)
+                        ivUserImage.setImageBitmap(bmp);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
-                break;
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

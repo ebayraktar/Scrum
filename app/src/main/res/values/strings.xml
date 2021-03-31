@@ -103,6 +103,7 @@
     <string name="task_constituent">Oluşturan</string>
     <string name="task_history">Görev Geçmişi</string>
     <string name="comments">Yorumlar</string>
+    <string name="menu_chart">Grafik</string>
 
     <string-array name="task_priorities">
         <item>Normal</item>

@@ -12,7 +12,6 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
 import android.widget.Toast;
 
 import com.bayraktar.scrum.BaseActivity;
@@ -23,7 +22,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,20 +29,40 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-import static com.bayraktar.scrum.App.currentUser;
 import static com.bayraktar.scrum.App.firebaseAuth;
 import static com.bayraktar.scrum.App.firebaseService;
 import static com.bayraktar.scrum.App.firebaseUser;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
+    private static final String MAIL_ADDRESS = "email";
+
     ConstraintLayout clRegister;
     TextInputLayout tilFullName, tilEmail, tilPassword, tilPasswordConfirm;
     TextInputEditText tietFullName, tietEmail, tietPassword, tietPasswordConfirm;
     CardView cvSignUp;
 
-    public static RegisterFragment newInstance() {
-        return new RegisterFragment();
+    String email;
+
+    public RegisterFragment() {
+    }
+
+    public static RegisterFragment newInstance(String email) {
+        RegisterFragment fragment = new RegisterFragment();
+        Bundle args = new Bundle();
+        args.putString(MAIL_ADDRESS, email);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        email = "";
+        if (getArguments() != null) {
+            email = getArguments().getString(MAIL_ADDRESS);
+        }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -60,6 +78,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         tietFullName = view.findViewById(R.id.tietFullName);
         tietEmail = view.findViewById(R.id.tietEmail);
+        tietEmail.setText(email);
+
         tietPassword = view.findViewById(R.id.tietPassword);
         tietPasswordConfirm = view.findViewById(R.id.tietPasswordConfirm);
 

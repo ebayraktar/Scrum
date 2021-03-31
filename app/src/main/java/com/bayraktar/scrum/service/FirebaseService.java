@@ -46,10 +46,10 @@ public class FirebaseService {
     DatabaseReference tasksRef = firebaseDatabase.getReference("TASKS");
     DatabaseReference taskHistoriesRef = firebaseDatabase.getReference("taskHistories");
     DatabaseReference taskCommentsRef = firebaseDatabase.getReference("taskComments");
-    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
-    private MutableLiveData<String> currentUserName;
+    private final MutableLiveData<String> currentUserName;
 
     public FirebaseService() {
         currentUserName = new MutableLiveData<>();
@@ -77,15 +77,15 @@ public class FirebaseService {
         return currentUserName;
     }
 
-    public void uploadUserImage(String userID, Uri uri, OnSuccessListener<UploadTask.TaskSnapshot> listener) {
-        if (userID != null && !userID.equals("") && uri != null) {
-            mStorageRef.child("users").child(userID + ".jpg").putFile(uri).addOnSuccessListener(listener);
+    public void uploadUserImage(String userID, byte[] bytes, OnSuccessListener<UploadTask.TaskSnapshot> listener) {
+        if (userID != null && !userID.equals("") && bytes != null && bytes.length > 0) {
+            mStorageRef.child("users").child(userID + ".jpg").putBytes(bytes).addOnSuccessListener(listener);
         }
     }
 
-    public void uploadProjectImage(String projectID, Uri uri, OnSuccessListener<UploadTask.TaskSnapshot> listener) {
-        if (projectID != null && !projectID.equals("") && uri != null) {
-            mStorageRef.child("projects").child(projectID + ".jpg").putFile(uri).addOnSuccessListener(listener);
+    public void uploadProjectImage(String projectID, byte[] bytes, OnSuccessListener<UploadTask.TaskSnapshot> listener) {
+        if (projectID != null && !projectID.equals("") && bytes != null && bytes.length > 0) {
+            mStorageRef.child("projects").child(projectID + ".jpg").putBytes(bytes).addOnSuccessListener(listener);
         }
     }
 
@@ -157,7 +157,7 @@ public class FirebaseService {
         }
     }
 
-    public void insertTask(final String projectID, final Task task, OnCompleteListener listener) {
+    public void insertTask(final String projectID, final Task task, OnCompleteListener<Void> listener) {
         if (projectID != null && !projectID.equals("") && task != null) {
             if (task.getTaskID() == null || task.getTaskID().equals("")) {
                 String key = tasksRef.push().getKey();
@@ -171,7 +171,7 @@ public class FirebaseService {
         }
     }
 
-    public void updateTask(final String taskID, final Task task, OnCompleteListener listener) {
+    public void updateTask(final String taskID, final Task task, OnCompleteListener<Void> listener) {
         if (taskID != null && !taskID.equals("") && task != null) {
             HashMap<String, Object> taskHasMap = new HashMap<>();
             taskHasMap.put(task.getTaskID(), task);

@@ -1,6 +1,5 @@
 package com.bayraktar.scrum.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +7,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +29,7 @@ public class AttendantAdapter extends RecyclerView.Adapter<AttendantAdapter.View
     List<String> userIDList;
     List<Boolean> selectedUsers;
     List<User> users;
-    private AttendantAdapter.OnAttendantListener onAttendantListener;
+    private final AttendantAdapter.OnAttendantListener onAttendantListener;
 
     public AttendantAdapter(AttendantAdapter.OnAttendantListener onAttendantListener) {
         users = new ArrayList<>();

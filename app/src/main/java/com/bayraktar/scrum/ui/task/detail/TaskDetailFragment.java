@@ -2,15 +2,11 @@ package com.bayraktar.scrum.ui.task.detail;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,7 +60,6 @@ import static com.bayraktar.scrum.App.firebaseService;
 
 public class TaskDetailFragment extends Fragment implements View.OnClickListener, TaskCommentAdapter.OnCommentListener, AdapterView.OnItemSelectedListener {
 
-    private TaskDetailViewModel mViewModel;
     View viewStatus;
     TextView tvStatus;
     TextView tvDescription;
@@ -177,7 +171,7 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(TaskDetailViewModel.class);
+        TaskDetailViewModel mViewModel = new ViewModelProvider(this).get(TaskDetailViewModel.class);
         mViewModel.getTask(projectID, taskID).observe(getViewLifecycleOwner(), new Observer<Task>() {
             @Override
             public void onChanged(Task task) {
@@ -194,47 +188,46 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_delete:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Uyarı")
-                        .setMessage("Görevi silmek istediğinize emin misiniz?")
-                        .setIcon(R.drawable.ic_info)
-                        .setPositiveButton("SİL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                firebaseService.deleteTask(projectID, taskID);
-                                firebaseService.getProject(projectID, new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()) {
-                                            Project project = snapshot.getValue(Project.class);
-                                            if (project != null) {
-                                                Bundle bundle = new Bundle();
-                                                bundle.putString("projectID", projectID);
-                                                bundle.putString("title", project.getProjectName());
-                                                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_task_detail_to_nav_project_detail, bundle);
-                                            }
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_delete) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Uyarı")
+                    .setMessage("Görevi silmek istediğinize emin misiniz?")
+                    .setIcon(R.drawable.ic_info)
+                    .setPositiveButton("SİL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            firebaseService.deleteTask(projectID, taskID);
+                            firebaseService.getProject(projectID, new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        Project project = snapshot.getValue(Project.class);
+                                        if (project != null) {
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("projectID", projectID);
+                                            bundle.putString("title", project.getProjectName());
+                                            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_task_detail_to_nav_project_detail, bundle);
                                         }
                                     }
+                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton("İPTAL", null)
-                        .create().show();
-                return true;
-            case R.id.menu_edit:
-                editTask();
-                //Toast.makeText(getContext(), "Edit Fragment", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                                }
+                            });
+                        }
+                    })
+                    .setNegativeButton("İPTAL", null)
+                    .create().show();
+            return true;
+        } else if (itemId == R.id.menu_edit) {
+            editTask();
+            //Toast.makeText(getContext(), "Edit Fragment", Toast.LENGTH_SHORT).show();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     void editTask() {
@@ -388,14 +381,12 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
-            case R.id.cvSend:
-                if (tietComment.getText().toString().trim().equals("")) {
-                    tilComment.setError("Boş olamaz!");
-                } else {
-                    sendComment();
-                }
-                break;
+        if (v.getId() == R.id.cvSend) {
+            if (tietComment.getText().toString().trim().equals("")) {
+                tilComment.setError("Boş olamaz!");
+            } else {
+                sendComment();
+            }
         }
     }
 
@@ -406,35 +397,33 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
-            case R.id.spStatus:
-                if (currentTask != null && currentTask.getTaskStatusID() != position) {
-                    Date currentDate = Calendar.getInstance().getTime();
-                    TaskHistory historyModel = new TaskHistory();
-                    historyModel.setChangeDate(currentDate);
-                    historyModel.setOldTaskStatus(currentTask.getTaskStatusID());
-                    historyModel.setCurrentTaskStatus(position);
-                    historyModel.setConstituent(currentUser.getUserID());
-                    String historyID = firebaseService.setTaskHistory(taskID, historyModel);
-                    historyModel.setHistoryID(historyID);
-                    firebaseService.updateProjectTaskStatus(projectID, taskID, position);
-                    HashMap<String, Boolean> historyModelList = currentTask.getTaskHistoryList();
-                    if (historyModelList == null) {
-                        historyModelList = new HashMap<>();
-                    }
-                    historyModelList.put(historyID, true);
-                    currentTask.setTaskStatusID(position);
-                    currentTask.setTaskHistoryList(historyModelList);
-                    setTask(currentTask);
+        int parentId = parent.getId();
+        if (parentId == R.id.spStatus) {
+            if (currentTask != null && currentTask.getTaskStatusID() != position) {
+                Date currentDate = Calendar.getInstance().getTime();
+                TaskHistory historyModel = new TaskHistory();
+                historyModel.setChangeDate(currentDate);
+                historyModel.setOldTaskStatus(currentTask.getTaskStatusID());
+                historyModel.setCurrentTaskStatus(position);
+                historyModel.setConstituent(currentUser.getUserID());
+                String historyID = firebaseService.setTaskHistory(taskID, historyModel);
+                historyModel.setHistoryID(historyID);
+                firebaseService.updateProjectTaskStatus(projectID, taskID, position);
+                HashMap<String, Boolean> historyModelList = currentTask.getTaskHistoryList();
+                if (historyModelList == null) {
+                    historyModelList = new HashMap<>();
                 }
-                break;
-            case R.id.spPriority:
-                if (currentTask != null && currentTask.getPriorityID() != position) {
-                    currentTask.setPriorityID(position);
-                    firebaseService.updateTask(taskID, currentTask, null);
-                    setTask(currentTask);
-                }
-                break;
+                historyModelList.put(historyID, true);
+                currentTask.setTaskStatusID(position);
+                currentTask.setTaskHistoryList(historyModelList);
+                setTask(currentTask);
+            }
+        } else if (parentId == R.id.spPriority) {
+            if (currentTask != null && currentTask.getPriorityID() != position) {
+                currentTask.setPriorityID(position);
+                firebaseService.updateTask(taskID, currentTask, null);
+                setTask(currentTask);
+            }
         }
     }
 

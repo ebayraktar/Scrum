@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_main">
+    app:startDestination="@+id/nav_chart">
 
     <fragment
         android:id="@+id/nav_main"
@@ -28,6 +28,16 @@
             app:popUpTo="@id/nav_main"
             app:popUpToInclusive="true"
             />
+        <action
+            android:id="@+id/action_nav_main_to_nav_project_detail"
+            app:destination="@id/nav_project_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_chart"
+        android:name="com.bayraktar.scrum.ui.chart.ChartFragment"
+        android:label="@string/menu_chart"
+        tools:layout="@layout/fragment_chart">
     </fragment>
 
     <fragment
@@ -53,6 +63,11 @@
         android:name="com.bayraktar.scrum.ui.account.RegisterFragment"
         android:label="@string/menu_register"
         tools:layout="@layout/fragment_register">
+
+
+        <argument
+            android:name="email"
+            app:argType="string" />
 
         <action
             android:id="@+id/action_nav_register_to_nav_login"

@@ -1,8 +1,9 @@
 package com.bayraktar.scrum.ui.project.add;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,16 +24,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.bayraktar.scrum.App;
 import com.bayraktar.scrum.BaseActivity;
 import com.bayraktar.scrum.R;
-import com.bayraktar.scrum.model.Invitation;
 import com.bayraktar.scrum.model.MobileResult;
 import com.bayraktar.scrum.model.Project;
 import com.bumptech.glide.Glide;
@@ -46,6 +46,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -63,7 +66,7 @@ import static com.bayraktar.scrum.App.firebaseService;
  */
 public class ProjectAddFragment extends Fragment implements View.OnClickListener {
 
-    ProjectAddViewModel viewModel;
+    ProjectAddViewModel mViewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -136,7 +139,7 @@ public class ProjectAddFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_add, container, false);
 
-        viewModel = new ViewModelProvider(this).get(ProjectAddViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ProjectAddViewModel.class);
 
         clNewProject = view.findViewById(R.id.clNewProject);
 
@@ -156,9 +159,9 @@ public class ProjectAddFragment extends Fragment implements View.OnClickListener
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    buttonView.setText("Özel");
+                    buttonView.setText(R.string.privacy_private);
                 } else {
-                    buttonView.setText("Genel");
+                    buttonView.setText(R.string.privacy_public);
                 }
             }
         });
@@ -315,7 +318,7 @@ public class ProjectAddFragment extends Fragment implements View.OnClickListener
             currentProject.setProjectName(tietProjectName.getText().toString().trim());
             currentProject.setPrivacyMode(swcPrivacyMode.isChecked());
             currentProject.setProjectImageURL(defaultImage);
-            viewModel.insertProject(currentProject, invitationEmails).
+            mViewModel.insertProject(currentProject, invitationEmails).
                     observe(getViewLifecycleOwner(), new Observer<MobileResult>() {
                         @Override
                         public void onChanged(MobileResult mobileResult) {
@@ -331,7 +334,17 @@ public class ProjectAddFragment extends Fragment implements View.OnClickListener
                                 return;
                             }
                             if (selectedImage != null) {
-                                firebaseService.uploadProjectImage(currentProject.getProjectID(), selectedImage, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                Bitmap bmp = ((BitmapDrawable) ivProject.getDrawable()).getBitmap();
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                                byte[] byteArray = stream.toByteArray();
+                                try {
+                                    stream.close();
+                                } catch (IOException e) {
+
+                                    e.printStackTrace();
+                                }
+                                firebaseService.uploadProjectImage(currentProject.getProjectID(), byteArray, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -411,25 +424,20 @@ public class ProjectAddFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode) {
-            case 0:
-                if (resultCode == RESULT_OK) {
-                    Log.d("TAG", "onActivityResult: " + data.getData());
-                    Uri selectedImage = data.getData();
-                    ivProject.setImageURI(selectedImage);
-                }
-
-                break;
-            case 1:
-
-                if (data != null) {
-                    Log.d("TAG", "onActivityResult: " + data.getData());
-                }
-                if (resultCode == RESULT_OK) {
+        if (requestCode == 1) {
+            if (data != null) {
+                Log.d("TAG", "onActivityResult: " + data.getData());
+            }
+            if (resultCode == RESULT_OK) {
+                try {
                     selectedImage = data.getData();
-                    ivProject.setImageURI(selectedImage);
+                    Bitmap bmp = App.decodeUri(getContext(), data.getData(), 200);
+                    if (bmp != null)
+                        ivProject.setImageBitmap(bmp);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
-                break;
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

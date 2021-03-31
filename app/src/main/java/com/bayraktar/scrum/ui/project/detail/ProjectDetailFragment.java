@@ -3,14 +3,12 @@ package com.bayraktar.scrum.ui.project.detail;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,11 +43,11 @@ public class ProjectDetailFragment extends Fragment implements View.OnClickListe
     public ProjectDetailFragment() {
     }
 
-    public static ProjectDetailFragment newInstance(String taskID) {
+    public static ProjectDetailFragment newInstance(String projectID) {
 
         ProjectDetailFragment fragment = new ProjectDetailFragment();
         Bundle args = new Bundle();
-        args.putString(PROJECT_ID, taskID);
+        args.putString(PROJECT_ID, projectID);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,71 +70,65 @@ public class ProjectDetailFragment extends Fragment implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Bundle bundle = new Bundle();
-        switch (item.getItemId()) {
-            case R.id.menu_delete:
-                if (currentProject.getConstituentID().equals(currentUser.getUserID())) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("Uyarı")
-                            .setMessage("Projeyi silmek istediğinize emin misiniz?")
-                            .setIcon(R.drawable.ic_info)
-                            .setPositiveButton("SİL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    firebaseService.deleteProject(projectID);
-                                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_project_detail_to_nav_projects);
-                                }
-                            })
-                            .setNegativeButton("İPTAL", null)
-                            .create().show();
-                } else {
-                    Snackbar.make(navView, "Bu işlemi yapabilmek için yetkiniz yok", BaseTransientBottomBar.LENGTH_LONG).show();
-                }
-                return true;
-            case R.id.menu_edit:
-                if (currentProject.getConstituentID().equals(currentUser.getUserID())) {
-                    bundle.putString("projectID", currentProject.getProjectID());
-                    bundle.putString("title", currentProject.getProjectName() + " Düzenle");
-                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_project_detail_to_nav_new_project, bundle);
-                } else {
-                    Snackbar.make(navView, "Bu işlemi yapabilmek için yetkiniz yok", BaseTransientBottomBar.LENGTH_LONG).show();
-                }
-                return true;
-
-            case R.id.menu_applications:
-                if (currentProject.getConstituentID().equals(currentUser.getUserID())) {
-                    bundle.putString("projectID", currentProject.getProjectID());
-                    bundle.putString("title", currentProject.getProjectName() + " Başvurular");
-                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_project_detail_to_nav_project_applications, bundle);
-                } else {
-                    Snackbar.make(navView, "Bu işlemi sadece proje sahibi yapabilir", BaseTransientBottomBar.LENGTH_LONG).show();
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_delete) {
+            if (currentProject.getConstituentID().equals(currentUser.getUserID())) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Uyarı")
+                        .setMessage("Projeyi silmek istediğinize emin misiniz?")
+                        .setIcon(R.drawable.ic_info)
+                        .setPositiveButton("SİL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                firebaseService.deleteProject(projectID);
+                                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_project_detail_to_nav_projects);
+                            }
+                        })
+                        .setNegativeButton("İPTAL", null)
+                        .create().show();
+            } else {
+                Snackbar.make(navView, "Bu işlemi yapabilmek için yetkiniz yok", BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+            return true;
+        } else if (itemId == R.id.menu_edit) {
+            if (currentProject.getConstituentID().equals(currentUser.getUserID())) {
+                bundle.putString("projectID", currentProject.getProjectID());
+                bundle.putString("title", currentProject.getProjectName() + " Düzenle");
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_project_detail_to_nav_new_project, bundle);
+            } else {
+                Snackbar.make(navView, "Bu işlemi yapabilmek için yetkiniz yok", BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+            return true;
+        } else if (itemId == R.id.menu_applications) {
+            if (currentProject.getConstituentID().equals(currentUser.getUserID())) {
+                bundle.putString("projectID", currentProject.getProjectID());
+                bundle.putString("title", currentProject.getProjectName() + " Başvurular");
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_project_detail_to_nav_project_applications, bundle);
+            } else {
+                Snackbar.make(navView, "Bu işlemi yapabilmek için yetkiniz yok", BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment;
-            switch (item.getItemId()) {
-                case R.id.navigation_pending:
-                    selectedFragment = ProjectDetailMainFragment.newInstance(0, projectID);
-                    break;
-                case R.id.navigation_active:
-                    selectedFragment = ProjectDetailMainFragment.newInstance(1, projectID);
-                    break;
-                case R.id.navigation_completed:
-                    selectedFragment = ProjectDetailMainFragment.newInstance(2, projectID);
-                    break;
-                case R.id.navigation_suspended:
-                    selectedFragment = ProjectDetailMainFragment.newInstance(3, projectID);
-                    break;
-                default:
-                    return false;
+            int itemId = item.getItemId();
+            if (itemId == R.id.navigation_pending) {
+                selectedFragment = ProjectDetailMainFragment.newInstance(0, projectID);
+            } else if (itemId == R.id.navigation_active) {
+                selectedFragment = ProjectDetailMainFragment.newInstance(1, projectID);
+            } else if (itemId == R.id.navigation_completed) {
+                selectedFragment = ProjectDetailMainFragment.newInstance(2, projectID);
+            } else if (itemId == R.id.navigation_suspended) {
+                selectedFragment = ProjectDetailMainFragment.newInstance(3, projectID);
+            } else {
+                return false;
             }
             if (currentFragment == selectedFragment) {
                 return false;

@@ -154,7 +154,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 login();
                 break;
             case R.id.cvRegister:
-                Navigation.findNavController(v).navigate(R.id.action_nav_login_to_nav_register);
+                Bundle bundle = new Bundle();
+                bundle.putString("email", tietEmail.getText().toString());
+                Navigation.findNavController(v).navigate(R.id.action_nav_login_to_nav_register, bundle);
                 break;
         }
     }

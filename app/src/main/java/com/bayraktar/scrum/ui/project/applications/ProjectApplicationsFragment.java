@@ -1,6 +1,5 @@
 package com.bayraktar.scrum.ui.project.applications;
 
-import android.location.GnssNavigationMessage;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,23 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.value.SimpleLottieValueCallback;
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.adapter.ApplicationAdapter;
 import com.bayraktar.scrum.model.Application;
-import com.bayraktar.scrum.model.Invitation;
-import com.bayraktar.scrum.model.InvitationStatus;
-import com.bayraktar.scrum.model.Member;
 import com.bayraktar.scrum.model.Project;
 import com.bayraktar.scrum.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.net.Inet4Address;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +47,7 @@ public class ProjectApplicationsFragment extends Fragment implements Application
     // TODO: Rename and change types of parameters
     private String projectID;
 
-    ProjectApplicationsViewModel viewModel;
+    ProjectApplicationsViewModel mViewModel;
 
     LottieAnimationView av_splash_animation;
     TextView tvNoApplication;
@@ -98,7 +89,7 @@ public class ProjectApplicationsFragment extends Fragment implements Application
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_applications, container, false);
-        viewModel = new ViewModelProvider(this).get(ProjectApplicationsViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ProjectApplicationsViewModel.class);
         av_splash_animation = view.findViewById(R.id.av_splash_animation);
         tvNoApplication = view.findViewById(R.id.tvNoApplication);
         rvApplications = view.findViewById(R.id.rvApplications);
@@ -111,12 +102,12 @@ public class ProjectApplicationsFragment extends Fragment implements Application
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel.getProject(projectID).observe(getViewLifecycleOwner(), new Observer<Project>() {
+        mViewModel.getProject(projectID).observe(getViewLifecycleOwner(), new Observer<Project>() {
             @Override
             public void onChanged(Project project) {
                 currentProject = project;
+                List<Application> tempList = new ArrayList<>();
                 if (project.getApplications() != null) {
-                    List<Application> tempList = new ArrayList<>();
                     for (Map.Entry<String, Integer> values : project.getApplications().entrySet()) {
                         Application tempApplication = new Application();
                         tempApplication.setInvitationStatus(Integer.parseInt(String.valueOf(values.getValue())));//java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.Integer
@@ -124,16 +115,18 @@ public class ProjectApplicationsFragment extends Fragment implements Application
                         if (tempApplication.getInvitationStatus() == 0)
                             tempList.add(tempApplication);
                     }
-                    setApplications(tempList);
                 }
+                setApplications(tempList);
             }
         });
     }
 
     void setApplications(List<Application> applications) {
         isLoadSuccess(applications != null && applications.size() > 0);
-        applicationList = applications;
-        applicationAdapter.setApplicationPermissionList(applications);
+        if (applications != null) {
+            applicationList = applications;
+            applicationAdapter.setApplicationPermissionList(applications);
+        }
     }
 
     void isLoadSuccess(boolean isSuccess) {

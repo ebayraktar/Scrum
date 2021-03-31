@@ -363,7 +363,7 @@ public class TaskAddFragment extends Fragment implements View.OnClickListener {
             currentTask.setPriorityID(spPriority.getSelectedItemPosition());
             currentTask.setTaskStatusID(spStatus.getSelectedItemPosition());
 
-            firebaseService.insertTask(projectID, currentTask, new OnCompleteListener() {
+            firebaseService.insertTask(projectID, currentTask, new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull com.google.android.gms.tasks.Task task) {
                     hideLoading();

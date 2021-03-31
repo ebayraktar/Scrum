@@ -198,19 +198,15 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.cvLogin:
-                Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_login);
-                break;
-            case R.id.cvProjects:
-                Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_projects);
-                break;
-            case R.id.cvTasks:
-                Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_tasks);
-                break;
-            case R.id.cvAccount:
-                Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_account);
-                break;
+        int id = v.getId();
+        if (id == R.id.cvLogin) {
+            Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_login);
+        } else if (id == R.id.cvProjects) {
+            Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_projects);
+        } else if (id == R.id.cvTasks) {
+            Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_tasks);
+        } else if (id == R.id.cvAccount) {
+            Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_account);
         }
     }
 
@@ -452,5 +448,14 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
 
             }
         });
+    }
+
+    @Override
+    public void onMainListItemClick(View v, int position) {
+        Project taskListModel = projectList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("projectID", taskListModel.getProjectID());
+        bundle.putString("title", taskListModel.getProjectName());
+        Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_project_detail, bundle);
     }
 }

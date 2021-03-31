@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity {
         });
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_main, R.id.nav_projects, R.id.nav_tasks)
+                R.id.nav_chart, R.id.nav_projects, R.id.nav_tasks)
                 .setDrawerLayout(drawer)
                 .build();
 

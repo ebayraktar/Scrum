@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.model.Application;
-import com.bayraktar.scrum.model.Invitation;
 import com.bayraktar.scrum.model.User;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +26,7 @@ import static com.bayraktar.scrum.App.firebaseService;
 public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.ViewHolder> {
 
     List<Application> applicationList;
-    private ApplicationAdapter.OnApplicationListener onApplicationListener;
+    private final ApplicationAdapter.OnApplicationListener onApplicationListener;
 
     public ApplicationAdapter(ApplicationAdapter.OnApplicationListener onApplicationListener) {
         applicationList = new ArrayList<>();
@@ -112,16 +111,13 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.cvUserProfile:
-                    onApplicationListener.onApplicationClick(getAdapterPosition());
-                    break;
-                case R.id.ivAccept:
-                    onApplicationListener.onAnswerClick(getAdapterPosition(), true);
-                    break;
-                case R.id.ivReject:
-                    onApplicationListener.onAnswerClick(getAdapterPosition(), false);
-                    break;
+            int id = v.getId();
+            if (id == R.id.cvUserProfile) {
+                onApplicationListener.onApplicationClick(getAdapterPosition());
+            } else if (id == R.id.ivAccept) {
+                onApplicationListener.onAnswerClick(getAdapterPosition(), true);
+            } else if (id == R.id.ivReject) {
+                onApplicationListener.onAnswerClick(getAdapterPosition(), false);
             }
         }
     }
