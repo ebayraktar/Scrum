@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,8 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:padding="8dp"
-                android:text="@string/menu_suspended" />
+                android:padding="8dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -78,14 +77,14 @@
                         style="@style/bodyTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:text="@string/start_date" />
 
                     <TextView
                         style="@style/bodyTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:text="@string/deadline" />
                 </TableRow>
 
@@ -96,14 +95,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:padding="8dp" />
+                        android:padding="2dp" />
 
                     <TextView
                         android:id="@+id/tvDeadline"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:padding="8dp" />
+                        android:padding="2dp" />
                 </TableRow>
 
 
@@ -130,21 +129,21 @@
                         style="@style/bodyTV"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:text="@string/task_constituent" />
 
                     <TextView
                         style="@style/bodyTV"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:text="@string/task_priority" />
 
                     <TextView
                         style="@style/bodyTV"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:text="@string/task_status" />
                 </TableRow>
 
@@ -154,19 +153,21 @@
                         android:id="@+id/tvConstituent"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:padding="8dp" />
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:padding="2dp" />
 
                     <Spinner
                         android:id="@+id/spPriority"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:padding="8dp" />
+                        tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
                     <Spinner
                         android:id="@+id/spStatus"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:padding="8dp" />
+                        tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
                 </TableRow>
             </TableLayout>
@@ -217,7 +218,9 @@
                             android:id="@+id/rvTaskHistory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
                             android:padding="8dp"
+                            android:visibility="gone"
                             tools:itemCount="1"
                             tools:listitem="@layout/list_item_task_history" />
 
@@ -271,6 +274,7 @@
                             android:id="@+id/rvTaskComment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
                             android:padding="8dp"
                             android:visibility="gone"
                             tools:itemCount="0"
@@ -295,13 +299,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilComment"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/comment"
+                    app:layout_constraintEnd_toStartOf="@id/cvSend"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -317,6 +324,7 @@
                     android:layout_height="36dp"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_attach_file"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilComment" />
 
@@ -326,6 +334,7 @@
                     android:layout_height="36dp"
                     android:gravity="center"
                     android:text="@string/attach_file"
+                    android:visibility="gone"
                     app:layout_constraintStart_toEndOf="@id/ivAttachFile"
                     app:layout_constraintTop_toTopOf="@id/ivAttachFile" />
 
@@ -333,10 +342,11 @@
                     android:id="@+id/cvSend"
                     android:layout_width="72dp"
                     android:layout_height="36dp"
+                    android:layout_marginBottom="8dp"
                     app:cardBackgroundColor="@color/colorGreen"
                     app:cardCornerRadius="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ivAttachFile">
+                    app:layout_constraintBottom_toBottomOf="@id/tilComment"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         style="@style/bodyTV"

@@ -3,14 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="@color/colorLightGrey"
-    app:cardCornerRadius="16dp">
+    app:cardBackgroundColor="@color/colorLightGrey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clProjectContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/colorDarkGrey"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ivProject"
@@ -24,20 +29,21 @@
         <TextView
             android:id="@+id/tvProject"
             style="@style/titleTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:text="@string/project_name"
+            app:layout_constraintEnd_toStartOf="@id/ivConstituent"
             app:layout_constraintStart_toEndOf="@id/ivProject"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDate"
             style="@style/bodyTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="01/01/2020"
+            app:layout_constraintEnd_toStartOf="@id/ivConstituent"
             app:layout_constraintStart_toEndOf="@id/ivProject"
             app:layout_constraintTop_toBottomOf="@id/tvProject" />
 
@@ -57,7 +63,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Gizli"
             app:layout_constraintStart_toEndOf="@id/tvPrivacyText"
             app:layout_constraintTop_toTopOf="@id/tvPrivacyText" />
 
@@ -74,12 +79,16 @@
         <TextView
             android:id="@+id/tvConstituent"
             style="@style/bodyTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="1"
             android:padding="4dp"
-            android:text="@string/user_full_name"
+            app:layout_constraintBottom_toBottomOf="@id/tvPrivacyValue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivConstituent" />
+            app:layout_constraintStart_toEndOf="@id/tvPrivacyValue"
+            app:layout_constraintTop_toTopOf="@id/tvPrivacyValue" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,6 +69,9 @@ public class ProjectDetailFragment extends Fragment implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (currentProject == null) {
+            return super.onOptionsItemSelected(item);
+        }
         Bundle bundle = new Bundle();
         int itemId = item.getItemId();
         if (itemId == R.id.menu_delete) {

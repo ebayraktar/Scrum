@@ -40,7 +40,7 @@ public class ScrumFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // TODO: Use the ViewModel
-        wvScrum.loadUrl(getContext().getString(R.string.url_scrum));
+        wvScrum.loadUrl(getContext().getString(R.string.url_report_problem));
         // Enable Javascript
         WebSettings webSettings = wvScrum.getSettings();
         webSettings.setJavaScriptEnabled(true);

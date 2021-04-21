@@ -22,9 +22,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import static com.bayraktar.scrum.App.firebaseService;
 
@@ -100,7 +102,8 @@ public class TaskHistoryAdapter extends RecyclerView.Adapter<TaskHistoryAdapter.
                         holder.ivStatus.setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.SRC_IN);
                         holder.ivStatus.setImageResource(icon);
                         holder.tvStatus.setText(status);
-                        holder.tvChangeDate.setText(DateFormat.getMediumDateFormat(context).format(item.getChangeDate()));
+//                        holder.tvChangeDate.setText(DateFormat.getMediumDateFormat(context).format(item.getChangeDate()));
+                        holder.tvChangeDate.setText(new SimpleDateFormat("HH:mm | EEE dd MMM y", Locale.getDefault()).format(item.getChangeDate()));
                     }
                 }
             }

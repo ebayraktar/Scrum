@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -148,26 +149,29 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
                 .error(R.drawable.ic_broken_image)
                 .into(ivUserImage);
 
-        if (currentUser.getName() != null) {
+        if (currentUser.getName() != null && !TextUtils.isEmpty(currentUser.getName())) {
             tvFullName.setText(currentUser.getName());
         } else {
             tvFullName.setText("Ad bulunamadı");
             tvFullName.setTypeface(tvFullName.getTypeface(), Typeface.ITALIC);
         }
-        if (currentUser.getJobTitle() != null) {
+
+        if (currentUser.getJobTitle() != null && !TextUtils.isEmpty(currentUser.getJobTitle())) {
             tvUserJobTitle.setText(currentUser.getJobTitle());
         } else {
             tvUserJobTitle.setText("Görev bulunamadı");
             tvUserJobTitle.setTypeface(tvUserJobTitle.getTypeface(), Typeface.ITALIC);
         }
-        if (currentUser.getLocation() != null) {
+
+        if (currentUser.getLocation() != null && !TextUtils.isEmpty(currentUser.getLocation())) {
             tvLocation.setText(currentUser.getLocation());
         } else {
             tvLocation.setText("Konum bulunamadı");
             tvLocation.setTypeface(tvLocation.getTypeface(), Typeface.ITALIC);
         }
+
         if (currentUser.getBirthDate() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
             tvBirthDate.setText(sdf.format(currentUser.getBirthDate().getTime()));
         } else {
             tvBirthDate.setText("Doğum tarihi bulunamadı");
@@ -359,7 +363,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
         tvJobTitle.setText(user.getJobTitle());
         tvLocation.setText(user.getLocation());
 
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         tvDateValue.setText(sdf.format(project.getCreateDate().getTime()));
         int memberValue = 0;
         if (project.getMembers() != null)
@@ -452,10 +456,10 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
 
     @Override
     public void onMainListItemClick(View v, int position) {
-        Project taskListModel = projectList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("projectID", taskListModel.getProjectID());
-        bundle.putString("title", taskListModel.getProjectName());
-        Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_project_detail, bundle);
+//        Project taskListModel = projectList.get(position);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("projectID", taskListModel.getProjectID());
+//        bundle.putString("title", taskListModel.getProjectName());
+//        Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_project_detail, bundle);
     }
 }

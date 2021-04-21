@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -132,6 +133,8 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
         tvAttachFile = view.findViewById(R.id.tvAttachFile);
         cvSend = view.findViewById(R.id.cvSend);
 
+        ivAttachFile.setOnClickListener(this);
+        tvAttachFile.setOnClickListener(this);
         cvSend.setOnClickListener(this);
 
         tvTaskHistory = view.findViewById(R.id.tvTaskHistory);
@@ -382,11 +385,13 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
 
         if (v.getId() == R.id.cvSend) {
-            if (tietComment.getText().toString().trim().equals("")) {
+            if (TextUtils.isEmpty(tietComment.getText())) {
                 tilComment.setError("Boş olamaz!");
             } else {
                 sendComment();
             }
+        } else if (v.getId() == R.id.tvAttachFile || v.getId() == R.id.ivAttachFile) {
+            Toast.makeText(getContext(), "Bu özellik daha sonra aktif edilecektir!", Toast.LENGTH_SHORT).show();
         }
     }
 

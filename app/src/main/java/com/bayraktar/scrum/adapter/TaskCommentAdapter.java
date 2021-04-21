@@ -19,8 +19,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.bayraktar.scrum.App.firebaseService;
 
@@ -83,7 +85,8 @@ public class TaskCommentAdapter extends RecyclerView.Adapter<TaskCommentAdapter.
                         });
 
                         if (item.getCommentDate() != null) {
-                            holder.tvDate.setText(DateFormat.getMediumDateFormat(context).format(item.getCommentDate()));
+//                            holder.tvDate.setText(DateFormat.getMediumDateFormat(context).format(item.getCommentDate()));
+                            holder.tvDate.setText(new SimpleDateFormat("HH:mm | dd/MM/yy", Locale.getDefault()).format(item.getCommentDate()));
                         }
                         holder.tvComment.setText(item.getComment());
                         if (item.getAttachmentURL() != null && !item.getAttachmentURL().trim().equals("")) {

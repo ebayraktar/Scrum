@@ -24,10 +24,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.bayraktar.scrum.App.firebaseService;
 
@@ -108,8 +110,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         });
 
 
-        holder.tvStartDate.setText(DateFormat.getMediumDateFormat(context).format(item.getStartDate()));
-        holder.tvDeadline.setText(DateFormat.getMediumDateFormat(context).format(item.getDeadline()));
+//        holder.tvStartDate.setText(DateFormat.getMediumDateFormat(context).format(item.getStartDate()));
+        holder.tvStartDate.setText(new SimpleDateFormat("EEE dd MMM y", Locale.getDefault()).format(item.getStartDate()));
+
+//        holder.tvDeadline.setText(DateFormat.getMediumDateFormat(context).format(item.getDeadline()));
+        holder.tvDeadline.setText(new SimpleDateFormat("EEE dd MMM y", Locale.getDefault()).format(item.getDeadline()));
         Date now = Calendar.getInstance().getTime();
         if (item.getDeadline().before(now)) {
             holder.ivDate.setColorFilter(ContextCompat.getColor(context, R.color.colorRed), PorterDuff.Mode.SRC_IN);

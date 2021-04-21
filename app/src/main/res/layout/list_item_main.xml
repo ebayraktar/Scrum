@@ -4,19 +4,25 @@
     android:id="@+id/cvContent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="@color/colorLightGrey"
-    app:cardCornerRadius="16dp">
+    android:elevation="4dp"
+    app:cardBackgroundColor="@color/colorLightGrey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clProjectContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/colorDarkGrey"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/ivProject"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:padding="8dp"
             android:src="@drawable/ic_menu_projects"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,9 +32,11 @@
             android:id="@+id/tvProject"
             style="@style/titleTV"
             android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:padding="4dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/project_name"
+            android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toStartOf="@id/cvInvitation"
             app:layout_constraintStart_toEndOf="@id/ivProject"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,9 +45,12 @@
             android:id="@+id/tvDate"
             style="@style/bodyTV"
             android:layout_width="0dp"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
             android:padding="4dp"
             android:text="01/01/2020"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@id/cvInvitation"
             app:layout_constraintStart_toEndOf="@id/ivProject"
             app:layout_constraintTop_toBottomOf="@id/tvProject" />
@@ -47,7 +58,7 @@
 
         <ImageView
             android:id="@+id/ivConstituent"
-            android:layout_width="72dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="8dp"
             android:src="@drawable/ic_menu_account"
@@ -59,8 +70,12 @@
             style="@style/bodyTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:padding="4dp"
             android:text="@string/user_full_name"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/ivConstituent"
             app:layout_constraintEnd_toStartOf="@id/cvInvitation"
             app:layout_constraintStart_toEndOf="@id/ivConstituent"
@@ -70,9 +85,10 @@
             android:id="@+id/cvInvitation"
             android:layout_width="128dp"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
             app:cardBackgroundColor="@color/colorLightBlue"
             app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
             app:layout_constraintBottom_toTopOf="@id/cvDetail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -86,7 +102,8 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="@string/send_invitation"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -94,7 +111,8 @@
             android:id="@+id/cvDetail"
             android:layout_width="128dp"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
+            android:elevation="4dp"
             app:cardBackgroundColor="@color/colorLightBlue"
             app:cardCornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -109,7 +127,8 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="@string/details"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
 
         </androidx.cardview.widget.CardView>
 

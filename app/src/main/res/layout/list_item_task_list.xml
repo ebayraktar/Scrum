@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="8dp"
-    app:cardCornerRadius="16dp">
+    android:layout_marginBottom="2dp"
+    app:cardElevation="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTaskContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvTitle"
@@ -89,22 +90,43 @@
                             android:layout_height="@dimen/task_icon_height"
                             android:src="@drawable/ic_calendar" />
 
-                        <TextView
-                            android:id="@+id/tvStartDate"
+                        <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="4dp"
-                            android:text="01/01/2000" />
+                            android:orientation="vertical">
 
+                            <TextView
+                                style="@style/bodyTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="Başlama" />
 
-                        <TextView
-                            android:id="@+id/tvDeadline"
+                            <TextView
+                                android:id="@+id/tvStartDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="4dp"
-                            android:text="01/01/2000" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/bodyTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="Bitiş" />
+
+                            <TextView
+                                android:id="@+id/tvDeadline"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp" />
+                        </LinearLayout>
                     </TableRow>
 
                 </TableLayout>
@@ -116,6 +138,7 @@
                     android:layout_marginTop="@dimen/task_item_margin_top"
                     app:cardBackgroundColor="@color/colorOrange"
                     app:cardCornerRadius="8dp"
+                    app:cardElevation="6dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tlContent">
 
