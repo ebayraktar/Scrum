@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.bayraktar.scrum.model.Invitation;
-import com.bayraktar.scrum.model.Project;
 import com.bayraktar.scrum.model.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,15 +14,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.bayraktar.scrum.App.currentUser;
 import static com.bayraktar.scrum.App.firebaseDatabase;
 
 public class TaskViewModel extends ViewModel {
-    private MutableLiveData<List<Task>> mutableData;
-    private DatabaseReference tasksRef = firebaseDatabase.getReference("TASKS");
+    private final MutableLiveData<List<Task>> mutableData;
+    private final DatabaseReference tasksRef;
 
     public TaskViewModel() {
         this.mutableData = new MutableLiveData<>();
+        tasksRef = firebaseDatabase.getReference("TASKS");
     }
 
     public LiveData<List<Task>> getTaskList(final String userID) {

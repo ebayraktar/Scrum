@@ -3,14 +3,15 @@ package com.bayraktar.scrum.model;
 import java.util.Date;
 
 public class Invitation {
-    String projectID;
-    String invitedUserID;
-    String invitingUser;
-    Date invitationDate;
-    String authorityGroupID;
-    int invitationStatus;
+    private String projectID;
+    private String invitedUserID;
+    private String invitingUser;
+    private Date invitationDate;
+    private String authorityGroupID;
+    private int invitationStatus;
 
     public Invitation() {
+        //
     }
 
     public Invitation(String projectID, String invitedUserID, String invitingUser, Date invitationDate, String authorityGroupID, int invitationStatus) {

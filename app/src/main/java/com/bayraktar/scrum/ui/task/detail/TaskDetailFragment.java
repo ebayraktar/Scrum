@@ -20,10 +20,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -32,6 +34,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bayraktar.scrum.BaseActivity;
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.adapter.TaskCommentAdapter;
@@ -54,6 +57,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.bayraktar.scrum.App.currentUser;
 import static com.bayraktar.scrum.App.firebaseService;
@@ -84,6 +88,10 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
 
     TaskCommentAdapter taskCommentAdapter;
     TaskHistoryAdapter taskHistoryAdapter;
+
+    private LottieAnimationView av_splash_animation;
+    private ConstraintLayout clContent;
+    private TextView tvNoTask;
 
     private static final String TASK_ID = "taskID";
     private static final String PROJECT_ID = "projectID";
@@ -132,6 +140,8 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
         tvAttachFile = view.findViewById(R.id.tvAttachFile);
         cvSend = view.findViewById(R.id.cvSend);
 
+        ivAttachFile.setOnClickListener(this);
+        tvAttachFile.setOnClickListener(this);
         cvSend.setOnClickListener(this);
 
         tvTaskHistory = view.findViewById(R.id.tvTaskHistory);
@@ -142,6 +152,11 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
 
         tvTaskComment = view.findViewById(R.id.tvTaskComment);
         rvTaskComment = view.findViewById(R.id.rvTaskComment);
+
+        av_splash_animation = view.findViewById(R.id.av_splash_animation);
+        clContent = view.findViewById(R.id.clContent);
+        tvNoTask = view.findViewById(R.id.tvNoTask);
+
         taskCommentAdapter = new TaskCommentAdapter(getContext(), this);
         rvTaskComment.setLayoutManager(new LinearLayoutManager(getContext()));
         rvTaskComment.setAdapter(taskCommentAdapter);
@@ -241,9 +256,13 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
     int statusColor;
 
     void setTask(Task task) {
+        av_splash_animation.setVisibility(View.GONE);
         currentTask = task;
-        if (currentTask == null)
+        if (currentTask == null) {
+            tvNoTask.setVisibility(View.VISIBLE);
             return;
+        }
+        clContent.setVisibility(View.VISIBLE);
 
         //int statusColor;
         int statusText;
@@ -329,14 +348,14 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
         spStatus.setSelection(currentTask.getTaskStatusID());
     }
 
-    private void setTaskComments(HashMap<String, Boolean> taskCommentList) {
+    private void setTaskComments(Map<String, Boolean> taskCommentList) {
         if (taskCommentList != null) {
             List<String> commentKeys = new ArrayList<>(taskCommentList.keySet());
             taskCommentAdapter.setTaskCommentModelList(commentKeys);
         }
     }
 
-    private void setTaskHistories(HashMap<String, Boolean> taskHistoryList) {
+    private void setTaskHistories(Map<String, Boolean> taskHistoryList) {
         if (taskHistoryList != null) {
             List<String> historyKeys = new ArrayList<>(taskHistoryList.keySet());
             taskHistoryAdapter.setTaskHistoryList(historyKeys);
@@ -369,7 +388,7 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
         tietComment.setText("");
-        HashMap<String, Boolean> comments = currentTask.getTaskCommentList();
+        Map<String, Boolean> comments = currentTask.getTaskCommentList();
         if (comments == null) {
             comments = new HashMap<>();
         }
@@ -382,11 +401,13 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
 
         if (v.getId() == R.id.cvSend) {
-            if (tietComment.getText().toString().trim().equals("")) {
+            if (TextUtils.isEmpty(tietComment.getText())) {
                 tilComment.setError("Boş olamaz!");
             } else {
                 sendComment();
             }
+        } else if (v.getId() == R.id.tvAttachFile || v.getId() == R.id.ivAttachFile) {
+            Toast.makeText(getContext(), "Bu özellik daha sonra aktif edilecektir!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -409,7 +430,7 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
                 String historyID = firebaseService.setTaskHistory(taskID, historyModel);
                 historyModel.setHistoryID(historyID);
                 firebaseService.updateProjectTaskStatus(projectID, taskID, position);
-                HashMap<String, Boolean> historyModelList = currentTask.getTaskHistoryList();
+                Map<String, Boolean> historyModelList = currentTask.getTaskHistoryList();
                 if (historyModelList == null) {
                     historyModelList = new HashMap<>();
                 }

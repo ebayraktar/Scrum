@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGrey"
     tools:context=".ui.main.MainFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvUserProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:cardBackgroundColor="@color/colorLime"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,8 +23,9 @@
 
             <ImageView
                 android:id="@+id/ivUserImage"
-                android:layout_width="96dp"
-                android:layout_height="128dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:contentDescription="@string/app_name"
                 android:padding="8dp"
                 android:src="@drawable/ic_menu_account"
                 app:layout_constraintStart_toStartOf="parent"
@@ -32,9 +35,12 @@
                 android:id="@+id/tvFullName"
                 style="@style/titleTV"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
-                android:paddingHorizontal="4dp"
-                android:paddingVertical="8dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@id/cvProjects"
                 app:layout_constraintStart_toEndOf="@id/ivUserImage"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,8 +48,11 @@
             <TextView
                 android:id="@+id/tvUserJobTitle"
                 android:layout_width="0dp"
-                android:layout_height="28dp"
-                android:padding="4dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:textSize="12sp"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toStartOf="@id/cvProjects"
                 app:layout_constraintStart_toEndOf="@id/ivUserImage"
@@ -53,10 +62,13 @@
                 android:id="@+id/tvLocation"
                 style="@style/bodyTV"
                 android:layout_width="0dp"
-                android:layout_height="28dp"
-                android:padding="4dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="2dp"
                 android:textColor="@color/colorDarkGrey"
-                app:layout_constraintEnd_toStartOf="@id/cvProjects"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/tvBirthDate"
                 app:layout_constraintStart_toEndOf="@id/ivUserImage"
                 app:layout_constraintTop_toBottomOf="@id/tvUserJobTitle" />
 
@@ -64,12 +76,15 @@
                 android:id="@+id/tvBirthDate"
                 style="@style/bodyTV"
                 android:layout_width="0dp"
-                android:layout_height="28dp"
-                android:padding="4dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="2dp"
                 android:textColor="@color/colorDarkGrey"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@id/cvProjects"
-                app:layout_constraintStart_toEndOf="@id/ivUserImage"
-                app:layout_constraintTop_toBottomOf="@id/tvLocation" />
+                app:layout_constraintStart_toEndOf="@id/tvLocation"
+                app:layout_constraintTop_toBottomOf="@id/tvUserJobTitle" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvProjects"
@@ -201,6 +216,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvUserProfile"
+        tools:itemCount="2"
         tools:listitem="@layout/list_item_main" />
 
 

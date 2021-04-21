@@ -2,48 +2,36 @@ package com.bayraktar.scrum.ui.account;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.bayraktar.scrum.BaseActivity;
 import com.bayraktar.scrum.R;
-import com.bayraktar.scrum.model.User;
 import com.bayraktar.scrum.view.MainActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
-
-import static com.bayraktar.scrum.App.currentUser;
 import static com.bayraktar.scrum.App.firebaseAuth;
-import static com.bayraktar.scrum.App.firebaseService;
 import static com.bayraktar.scrum.App.firebaseUser;
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment {
 
     ConstraintLayout clLogin;
-    TextInputLayout tilEmail, tilPassword;
-    TextInputEditText tietEmail, tietPassword;
-    CardView cvLogin, cvRegister;
+    TextInputLayout tilEmail;
+    TextInputLayout tilPassword;
+
+    TextInputEditText tietEmail;
+    TextInputEditText tietPassword;
 
 
     public static LoginFragment newInstance() {
@@ -63,44 +51,44 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         tietEmail = view.findViewById(R.id.tietEmail);
         tietPassword = view.findViewById(R.id.tietPassword);
 
-        cvLogin = view.findViewById(R.id.cvLogin);
-        cvRegister = view.findViewById(R.id.cvRegister);
 
-        cvLogin.setOnClickListener(this);
-        cvRegister.setOnClickListener(this);
+        view.findViewById(R.id.cvLogin).setOnClickListener(v -> login());
+        view.findViewById(R.id.cvRegister).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("email", tietEmail.getText().toString());
+            Navigation.findNavController(v).navigate(R.id.action_nav_login_to_nav_register, bundle);
+        });
 
         return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // TODO: Use the ViewModel
+    public void onDestroyView() {
+        if (getActivity() != null) {
+            BaseActivity.hideKeyboard(getActivity());
+        }
+        super.onDestroyView();
     }
 
     void login() {
         if (isValid()) {
             BaseActivity.hideKeyboard(getActivity());
             setLoading(true);
-            String email, password;
-            email = tietEmail.getText().toString().trim();
-            password = tietPassword.getText().toString().trim();
+            String email = tietEmail.getText().toString().trim();
+            String password = tietPassword.getText().toString().trim();
             firebaseAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            setLoading(false);
-                            if (task.isSuccessful()) {
-                                firebaseUser = firebaseAuth.getCurrentUser();
-                                getUserInformation();
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                builder.setTitle("HATA")
-                                        .setIcon(R.drawable.ic_info)
-                                        .setMessage("Kullanıcı adı/parola hatalı")
-                                        .setPositiveButton("TAMAM", null)
-                                        .create().show();
-                            }
+                    .addOnCompleteListener(getActivity(), task -> {
+                        setLoading(false);
+                        if (task.isSuccessful()) {
+                            firebaseUser = firebaseAuth.getCurrentUser();
+                            getUserInformation();
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("HATA")
+                                    .setIcon(R.drawable.ic_info)
+                                    .setMessage("Kullanıcı adı/parola hatalı")
+                                    .setPositiveButton("TAMAM", null)
+                                    .create().show();
                         }
                     });
         }
@@ -125,7 +113,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                //
             }
         });
     }
@@ -145,19 +133,5 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             tilPassword.setError("");
         }
         return valid;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.cvLogin:
-                login();
-                break;
-            case R.id.cvRegister:
-                Bundle bundle = new Bundle();
-                bundle.putString("email", tietEmail.getText().toString());
-                Navigation.findNavController(v).navigate(R.id.action_nav_login_to_nav_register, bundle);
-                break;
-        }
     }
 }

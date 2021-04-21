@@ -1,10 +1,11 @@
 package com.bayraktar.scrum.model;
 
 public class Authorization {
-    int authorizationID;
-    String authorizationName;
+    private int authorizationID;
+    private String authorizationName;
 
     public Authorization() {
+        //
     }
 
     public int getAuthorizationID() {

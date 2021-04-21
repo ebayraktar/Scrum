@@ -431,7 +431,7 @@ public class ProjectAddFragment extends Fragment implements View.OnClickListener
             if (resultCode == RESULT_OK) {
                 try {
                     selectedImage = data.getData();
-                    Bitmap bmp = App.decodeUri(getContext(), data.getData(), 200);
+                    Bitmap bmp = App.decodeUri(getContext(), data.getData(), 50);
                     if (bmp != null)
                         ivProject.setImageBitmap(bmp);
                 } catch (FileNotFoundException e) {

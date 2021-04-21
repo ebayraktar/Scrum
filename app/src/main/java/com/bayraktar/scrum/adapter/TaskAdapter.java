@@ -2,11 +2,11 @@ package com.bayraktar.scrum.adapter;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,10 +24,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.bayraktar.scrum.App.firebaseService;
 
@@ -108,8 +110,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         });
 
 
-        holder.tvStartDate.setText(DateFormat.getMediumDateFormat(context).format(item.getStartDate()));
-        holder.tvDeadline.setText(DateFormat.getMediumDateFormat(context).format(item.getDeadline()));
+//        holder.tvStartDate.setText(DateFormat.getMediumDateFormat(context).format(item.getStartDate()));
+        holder.tvStartDate.setText(new SimpleDateFormat("EEE dd MMM y", Locale.getDefault()).format(item.getStartDate()));
+
+//        holder.tvDeadline.setText(DateFormat.getMediumDateFormat(context).format(item.getDeadline()));
+        holder.tvDeadline.setText(new SimpleDateFormat("EEE dd MMM y", Locale.getDefault()).format(item.getDeadline()));
         Date now = Calendar.getInstance().getTime();
         if (item.getDeadline().before(now)) {
             holder.ivDate.setColorFilter(ContextCompat.getColor(context, R.color.colorRed), PorterDuff.Mode.SRC_IN);
@@ -141,6 +146,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.cvTitle.setCardBackgroundColor(context.getResources().getColor(statusColor));
         holder.viewStatus.setBackgroundResource(statusColor);
         holder.tvStatus.setText(statusText);
+
+        holder.progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -165,6 +172,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         final TextView tvStatus;
         final CardView cvStatus;
 
+        final ProgressBar progressBar;
+
         final OnTaskListener onTaskListener;
 
         public ViewHolder(@NonNull View itemView, OnTaskListener onTaskListener) {
@@ -186,6 +195,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             viewStatus = itemView.findViewById(R.id.viewStatus);
             cvStatus = itemView.findViewById(R.id.cvStatus);
             tvStatus = itemView.findViewById(R.id.tvStatus);
+
+            progressBar = itemView.findViewById(R.id.progressBar);
 
             clTaskContent.setOnClickListener(this);
             this.onTaskListener = onTaskListener;

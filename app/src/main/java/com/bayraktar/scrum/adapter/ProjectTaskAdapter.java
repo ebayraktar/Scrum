@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -117,6 +118,7 @@ public class ProjectTaskAdapter extends RecyclerView.Adapter<ProjectTaskAdapter.
                             break;
                     }
                     holder.viewStatus.setBackgroundResource(statusColor);
+                    holder.progressBar.setVisibility(View.GONE);
                 }
             }
 
@@ -145,6 +147,8 @@ public class ProjectTaskAdapter extends RecyclerView.Adapter<ProjectTaskAdapter.
 
         final View viewStatus;
 
+        final ProgressBar progressBar;
+
         final ProjectTaskAdapter.OnProjectTaskListener onProjectTaskListener;
 
         public ViewHolder(@NonNull View itemView, ProjectTaskAdapter.OnProjectTaskListener onProjectTaskListener) {
@@ -160,6 +164,8 @@ public class ProjectTaskAdapter extends RecyclerView.Adapter<ProjectTaskAdapter.
             tvDeadline = itemView.findViewById(R.id.tvDeadline);
 
             viewStatus = itemView.findViewById(R.id.viewStatus);
+
+            progressBar = itemView.findViewById(R.id.progressBar);
 
             clProjectTaskContent.setOnClickListener(this);
             this.onProjectTaskListener = onProjectTaskListener;

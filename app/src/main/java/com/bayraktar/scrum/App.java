@@ -8,8 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 
+import com.bayraktar.scrum.manager.PrefManager;
 import com.bayraktar.scrum.model.User;
 import com.bayraktar.scrum.service.FirebaseService;
 import com.google.firebase.FirebaseApp;
@@ -18,8 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+
+import javax.inject.Singleton;
 
 public class App extends Application {
 
@@ -30,9 +31,17 @@ public class App extends Application {
     public static FirebaseService firebaseService;
     public static User currentUser;
     public static FirebaseAnalytics mFirebaseAnalytics;
+    @Singleton
+    private static PrefManager prefManager;
+
+    public static PrefManager getPrefManager() {
+        return prefManager;
+    }
+
 
     public App() {
     }
+
 
     @Override
     public void onCreate() {
@@ -45,6 +54,7 @@ public class App extends Application {
         createNotificationChannel();
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        prefManager = new PrefManager(getApplicationContext());
     }
 
     private void createNotificationChannel() {
@@ -81,11 +91,5 @@ public class App extends Application {
         BitmapFactory.Options o2 = new BitmapFactory.Options();
         o2.inSampleSize = scale;
         return BitmapFactory.decodeStream(c.getContentResolver().openInputStream(uri), null, o2);
-    }
-    public static Uri getImageUri(Context inContext, Bitmap inImage) {
-        //ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        //inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
     }
 }

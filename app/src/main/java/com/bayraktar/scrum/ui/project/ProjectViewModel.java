@@ -1,14 +1,12 @@
 package com.bayraktar.scrum.ui.project;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.bayraktar.scrum.model.Invitation;
 import com.bayraktar.scrum.model.Project;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,8 +20,8 @@ import static com.bayraktar.scrum.App.firebaseDatabase;
 
 public class ProjectViewModel extends ViewModel {
     // TODO: Implement the ViewModel
-    private MutableLiveData<List<Project>> mutableLiveData;
-    private DatabaseReference projectsRef = firebaseDatabase.getReference("PROJECTS");
+    private final MutableLiveData<List<Project>> mutableLiveData;
+    private final DatabaseReference projectsRef = firebaseDatabase.getReference("PROJECTS");
 
 
     public ProjectViewModel() {

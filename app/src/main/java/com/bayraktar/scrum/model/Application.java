@@ -3,9 +3,9 @@ package com.bayraktar.scrum.model;
 import java.util.Date;
 
 public class Application {
-    String appliedUserID;
-    Date applicationDate;
-    Integer invitationStatus;
+    private String appliedUserID;
+    private Date applicationDate;
+    private Integer invitationStatus;
 
     public Application() {
     }

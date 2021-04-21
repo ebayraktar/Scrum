@@ -2,12 +2,11 @@ package com.bayraktar.scrum.adapter;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,14 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.model.TaskHistory;
 import com.bayraktar.scrum.model.User;
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import static com.bayraktar.scrum.App.firebaseService;
 
@@ -100,7 +99,9 @@ public class TaskHistoryAdapter extends RecyclerView.Adapter<TaskHistoryAdapter.
                         holder.ivStatus.setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.SRC_IN);
                         holder.ivStatus.setImageResource(icon);
                         holder.tvStatus.setText(status);
-                        holder.tvChangeDate.setText(DateFormat.getMediumDateFormat(context).format(item.getChangeDate()));
+//                        holder.tvChangeDate.setText(DateFormat.getMediumDateFormat(context).format(item.getChangeDate()));
+                        holder.tvChangeDate.setText(new SimpleDateFormat("HH:mm | EEE dd MMM y", Locale.getDefault()).format(item.getChangeDate()));
+                        holder.progressBar.setVisibility(View.GONE);
                     }
                 }
             }
@@ -126,12 +127,15 @@ public class TaskHistoryAdapter extends RecyclerView.Adapter<TaskHistoryAdapter.
         final TextView tvConstituent;
         final TextView tvStatus;
 
+        final ProgressBar progressBar;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivStatus = itemView.findViewById(R.id.ivStatus);
             tvChangeDate = itemView.findViewById(R.id.tvChangeDate);
             tvConstituent = itemView.findViewById(R.id.tvConstituent);
             tvStatus = itemView.findViewById(R.id.tvStatus);
+            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
 }

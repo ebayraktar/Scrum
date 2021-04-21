@@ -77,7 +77,7 @@
     <string name="applied">Başvuruldu</string>
     <string name="menu_login">Giriş Yap</string>
     <string name="menu_register">Kayıt Ol</string>
-    <string name="email">Eposta</string>
+    <string name="email">E-posta</string>
     <string name="password">Parola</string>
 
     <string name="notification_channel">Bildirim kanalı</string>
@@ -117,6 +117,23 @@
         <item>Tamamlandı</item>
         <item>Askıda</item>
     </string-array>
+
+    <string name="next">DEVAM</string>
+    <string name="skip">ATLA</string>
+    <string name="start">ANLADIM!</string>
+
+    <string name="slide_1_title">Projelerini Yönet!</string>
+    <string name="slide_1_desc">Şimdi projelerini yönetmek Scrum ile çok kolay! Projelerini önceliklendir ve durumunu takip et</string>
+
+    <string name="slide_2_title">İlk Projeni Oluştur</string>
+    <string name="slide_2_desc">Kayıt ol ve ilk projeni oluştur! İstersen global projelere dahi ol, istersen kendi özel projeni oluştur!</string>
+
+    <string name="slide_3_title">İlk Görevini Oluştur</string>
+    <string name="slide_3_desc">Önceliklerini belirle, ekibini davet et ve ilk görevini oluştur!</string>
+
+    <string name="slide_4_title">Hazırsın!</string>
+    <string name="slide_4_desc">İşte bu kadar! Şimdi projeni yönetmeye hazırsın!</string>
+    <string name="required_field">*Zorunlu alan</string>
 
 
 </resources>

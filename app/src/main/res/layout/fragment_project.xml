@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGrey"
     tools:context=".ui.project.ProjectFragment">
 
     <TextView
         android:id="@+id/tvNoProject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_centerInParent="true"
         android:text="@string/no_project"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:visibility="gone" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProjectList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/fab"
+        android:layout_height="wrap_content"
+        tools:itemCount="2"
         tools:listitem="@layout/list_item_project_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

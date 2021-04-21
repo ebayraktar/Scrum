@@ -31,7 +31,6 @@
                 style="@style/titleTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/user_full_name"
                 app:layout_constraintEnd_toStartOf="@id/cbUser"
                 app:layout_constraintStart_toEndOf="@id/ivUser"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +39,6 @@
                 android:id="@+id/tvEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
                 app:layout_constraintEnd_toStartOf="@id/cbUser"
                 app:layout_constraintStart_toEndOf="@id/ivUser"
                 app:layout_constraintTop_toBottomOf="@id/tvUsername" />
@@ -49,7 +47,6 @@
                 android:id="@+id/tvJobTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/user_job_title"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toStartOf="@id/cbUser"
                 app:layout_constraintStart_toEndOf="@id/ivUser"

@@ -1,17 +1,12 @@
 package com.bayraktar.scrum.model;
 
 public class MobileResult {
-    int code;
-    String message;
-    String result;
+    private int code;
+    private String message;
+    private String result;
 
     public MobileResult() {
-    }
-
-    public MobileResult(int code, String message, String result) {
-        this.code = code;
-        this.message = message;
-        this.result = result;
+        //
     }
 
     public int getCode() {

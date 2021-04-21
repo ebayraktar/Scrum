@@ -1,14 +1,14 @@
 package com.bayraktar.scrum.model;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class AuthorityGroup {
-    int authorityID;
-    String authorityName;
-    HashMap<String, Boolean> authorizationIDList;
+    private int authorityID;
+    private String authorityName;
+    private Map<String, Boolean> authorizationIDList;
 
     public AuthorityGroup() {
+        //
     }
 
     public int getAuthorityID() {
@@ -27,11 +27,11 @@ public class AuthorityGroup {
         this.authorityName = authorityName;
     }
 
-    public HashMap<String, Boolean> getAuthorizationIDList() {
+    public Map<String, Boolean> getAuthorizationIDList() {
         return authorizationIDList;
     }
 
-    public void setAuthorizationIDList(HashMap<String, Boolean> authorizationIDList) {
+    public void setAuthorizationIDList(Map<String, Boolean> authorizationIDList) {
         this.authorizationIDList = authorizationIDList;
     }
 }

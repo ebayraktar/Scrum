@@ -1,22 +1,23 @@
 package com.bayraktar.scrum.model;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
 
 public class Project {
-    String projectID;
-    String projectName;
-    String projectImageURL;
-    String constituentID;
-    Date createDate;
-    HashMap<String, Boolean> members;
-    HashMap<String, Integer> invitations;
-    HashMap<String, Integer> applications;
-    boolean privacyMode;
-    HashMap<String, Integer> taskList;
-    boolean isDeleted;
+    private String projectID;
+    private String projectName;
+    private String projectImageURL;
+    private String constituentID;
+    private Date createDate;
+    private Map<String, Boolean> members;
+    private Map<String, Integer> invitations;
+    private Map<String, Integer> applications;
+    private boolean privacyMode;
+    private Map<String, Integer> taskList;
+    private boolean deleted;
 
     public Project() {
+        //
     }
 
     public String getProjectID() {
@@ -59,27 +60,28 @@ public class Project {
         this.createDate = createDate;
     }
 
-    public HashMap<String, Boolean> getMembers() {
+    public Map<String, Boolean> getMembers() {
         return members;
     }
 
-    public void setMembers(HashMap<String, Boolean> members) {
+    public void setMembers(Map<String, Boolean> members) {
+        //
         this.members = members;
     }
 
-    public HashMap<String, Integer> getInvitations() {
+    public Map<String, Integer> getInvitations() {
         return invitations;
     }
 
-    public void setInvitations(HashMap<String, Integer> invitations) {
+    public void setInvitations(Map<String, Integer> invitations) {
         this.invitations = invitations;
     }
 
-    public HashMap<String, Integer> getApplications() {
+    public Map<String, Integer> getApplications() {
         return applications;
     }
 
-    public void setApplications(HashMap<String, Integer> applications) {
+    public void setApplications(Map<String, Integer> applications) {
         this.applications = applications;
     }
 
@@ -91,19 +93,19 @@ public class Project {
         this.privacyMode = privacyMode;
     }
 
-    public HashMap<String, Integer> getTaskList() {
+    public Map<String, Integer> getTaskList() {
         return taskList;
     }
 
-    public void setTaskList(HashMap<String, Integer> taskList) {
+    public void setTaskList(Map<String, Integer> taskList) {
         this.taskList = taskList;
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 }

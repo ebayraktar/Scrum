@@ -1,11 +1,12 @@
 package com.bayraktar.scrum.model;
 
 public class NotificationPermission {
-    int notificationPermissionID;
-    String notificationPermissionName;
-    boolean notificationPermissionValue;
+    private int notificationPermissionID;
+    private String notificationPermissionName;
+    private boolean notificationPermissionValue;
 
     public NotificationPermission() {
+        //
     }
 
     public NotificationPermission(int notificationPermissionID, String notificationPermissionName, boolean notificationPermissionValue) {

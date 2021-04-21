@@ -1,10 +1,11 @@
 package com.bayraktar.scrum.model;
 
 public class InvitationStatus {
-    int invitationID;
-    String invitationName;
+    private int invitationID;
+    private String invitationName;
 
     public InvitationStatus() {
+        //
     }
 
     public InvitationStatus(int invitationID, String invitationName) {

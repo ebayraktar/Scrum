@@ -1,34 +1,23 @@
 package com.bayraktar.scrum.view;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.bayraktar.scrum.App;
 import com.bayraktar.scrum.BaseActivity;
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.model.User;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -45,7 +34,7 @@ public class MainActivity extends BaseActivity {
     private NavController navController;
     private NavigationView navigationView;
     Toolbar toolbar;
-
+    View viewHamburger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +42,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
+        viewHamburger = findViewById(R.id.viewHamburger);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -66,7 +56,7 @@ public class MainActivity extends BaseActivity {
         });
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_chart, R.id.nav_projects, R.id.nav_tasks)
+                R.id.nav_main, R.id.nav_projects, R.id.nav_tasks)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -134,6 +124,8 @@ public class MainActivity extends BaseActivity {
 //        if (itemNotifications != null) {
 //            itemNotifications.setVisible(isLogin);
 //        }
+
+
     }
 
     public void logout() {

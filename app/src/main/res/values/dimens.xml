@@ -11,4 +11,12 @@
     <dimen name="task_icon_width">36dp</dimen>
     <dimen name="task_icon_height">36dp</dimen>
     <dimen name="task_item_margin_top">8dp</dimen>
+
+    <dimen name="dots_height">48dp</dimen>
+    <dimen name="dots_margin_bottom">4dp</dimen>
+    <dimen name="img_width_height">120dp</dimen>
+    <dimen name="slide_title">30sp</dimen>
+    <dimen name="slide_desc">16sp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
+
 </resources>

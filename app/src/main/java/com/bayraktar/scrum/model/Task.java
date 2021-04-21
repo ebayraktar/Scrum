@@ -2,39 +2,24 @@ package com.bayraktar.scrum.model;
 
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class Task {
-    String taskID;
-    String taskName;
-    String projectID;
-    String taskDescription;
-    Date startDate;
-    Date deadline;
-    String constituentID;
-    int priorityID;
-    int taskStatusID;
-    HashMap<String, Boolean> attendants;
-    HashMap<String, Boolean> taskHistoryList;
-    HashMap<String, Boolean> taskCommentList;
-    HashMap<String, Boolean> followerList;
+    private String taskID;
+    private String taskName;
+    private String projectID;
+    private String taskDescription;
+    private Date startDate;
+    private Date deadline;
+    private String constituentID;
+    private int priorityID;
+    private int taskStatusID;
+    private Map<String, Boolean> attendants;
+    private Map<String, Boolean> taskHistoryList;
+    private Map<String, Boolean> taskCommentList;
+    private Map<String, Boolean> followerList;
 
     public Task() {
-    }
-
-    public Task(String taskName, String taskDescription, Date startDate, Date deadline, String constituentID, HashMap<String, Boolean> attendants, int priorityID, int taskStatusID, HashMap<String, Boolean> taskHistoryList, HashMap<String, Boolean> taskCommentList, HashMap<String, Boolean> followerList) {
-        this.taskName = taskName;
-        this.taskDescription = taskDescription;
-        this.startDate = startDate;
-        this.deadline = deadline;
-        this.constituentID = constituentID;
-        this.attendants = attendants;
-        this.priorityID = priorityID;
-        this.taskStatusID = taskStatusID;
-        this.taskHistoryList = taskHistoryList;
-        this.taskCommentList = taskCommentList;
-        this.followerList = followerList;
     }
 
     public String getTaskID() {
@@ -109,35 +94,35 @@ public class Task {
         this.taskStatusID = taskStatusID;
     }
 
-    public HashMap<String, Boolean> getAttendants() {
+    public Map<String, Boolean> getAttendants() {
         return attendants;
     }
 
-    public void setAttendants(HashMap<String, Boolean> attendants) {
+    public void setAttendants(Map<String, Boolean> attendants) {
         this.attendants = attendants;
     }
 
-    public HashMap<String, Boolean> getTaskHistoryList() {
+    public Map<String, Boolean> getTaskHistoryList() {
         return taskHistoryList;
     }
 
-    public void setTaskHistoryList(HashMap<String, Boolean> taskHistoryList) {
+    public void setTaskHistoryList(Map<String, Boolean> taskHistoryList) {
         this.taskHistoryList = taskHistoryList;
     }
 
-    public HashMap<String, Boolean> getTaskCommentList() {
+    public Map<String, Boolean> getTaskCommentList() {
         return taskCommentList;
     }
 
-    public void setTaskCommentList(HashMap<String, Boolean> taskCommentList) {
+    public void setTaskCommentList(Map<String, Boolean> taskCommentList) {
         this.taskCommentList = taskCommentList;
     }
 
-    public HashMap<String, Boolean> getFollowerList() {
+    public Map<String, Boolean> getFollowerList() {
         return followerList;
     }
 
-    public void setFollowerList(HashMap<String, Boolean> followerList) {
+    public void setFollowerList(Map<String, Boolean> followerList) {
         this.followerList = followerList;
     }
 }

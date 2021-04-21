@@ -1,17 +1,15 @@
 package com.bayraktar.scrum.ui.main;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,12 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bayraktar.scrum.App;
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.adapter.MainListAdapter;
-import com.bayraktar.scrum.model.Application;
-import com.bayraktar.scrum.model.Invitation;
-import com.bayraktar.scrum.model.InvitationStatus;
-import com.bayraktar.scrum.model.Member;
 import com.bayraktar.scrum.model.Project;
 import com.bayraktar.scrum.model.User;
 import com.bayraktar.scrum.ui.project.ProjectViewModel;
@@ -42,11 +37,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 import static com.bayraktar.scrum.App.currentUser;
 import static com.bayraktar.scrum.App.firebaseService;
@@ -61,6 +57,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
     CardView cvTasks;
     CardView cvAccount;
     LottieAnimationView av_splash_animation;
+    CardView cvUserProfile;
 
     ImageView ivUserImage;
     TextView tvFullName, tvUserJobTitle, tvLocation, tvBirthDate;
@@ -74,13 +71,15 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
     AlertDialog projectDialog;
 
     final String myFormat = "dd/MM/yyyy"; //In which you need put here
+    View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mViewModel = new ViewModelProvider(this).get(ProjectViewModel.class);
 
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
+        root = inflater.inflate(R.layout.fragment_main, container, false);
 
+        cvUserProfile = root.findViewById(R.id.cvUserProfile);
         av_splash_animation = root.findViewById(R.id.av_splash_animation);
 
         clUserProfile = root.findViewById(R.id.clUserProfile);
@@ -125,6 +124,25 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
         checkLoggedIn();
     }
 
+    private void showProjectTooltip() {
+        if (!App.getPrefManager().isShownCreateProjectTooltip()) {
+            new SimpleTooltip.Builder(getActivity())
+                    .anchorView(root)
+                    .text("Buradan yeni proje oluşturabilirsin.")
+                    .gravity(Gravity.START)
+                    .animated(true)
+                    .transparentOverlay(true)
+                    .onDismissListener(new SimpleTooltip.OnDismissListener() {
+                        @Override
+                        public void onDismiss(SimpleTooltip tooltip) {
+                            App.getPrefManager().setShownCreateProjectTooltip(true);
+//                            showProjectTooltip();
+                        }
+                    })
+                    .build().show();
+        }
+    }
+
     void stopLoading() {
         av_splash_animation.setVisibility(View.GONE);
     }
@@ -148,26 +166,29 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
                 .error(R.drawable.ic_broken_image)
                 .into(ivUserImage);
 
-        if (currentUser.getName() != null) {
+        if (currentUser.getName() != null && !TextUtils.isEmpty(currentUser.getName())) {
             tvFullName.setText(currentUser.getName());
         } else {
             tvFullName.setText("Ad bulunamadı");
             tvFullName.setTypeface(tvFullName.getTypeface(), Typeface.ITALIC);
         }
-        if (currentUser.getJobTitle() != null) {
+
+        if (currentUser.getJobTitle() != null && !TextUtils.isEmpty(currentUser.getJobTitle())) {
             tvUserJobTitle.setText(currentUser.getJobTitle());
         } else {
             tvUserJobTitle.setText("Görev bulunamadı");
             tvUserJobTitle.setTypeface(tvUserJobTitle.getTypeface(), Typeface.ITALIC);
         }
-        if (currentUser.getLocation() != null) {
+
+        if (currentUser.getLocation() != null && !TextUtils.isEmpty(currentUser.getLocation())) {
             tvLocation.setText(currentUser.getLocation());
         } else {
             tvLocation.setText("Konum bulunamadı");
             tvLocation.setTypeface(tvLocation.getTypeface(), Typeface.ITALIC);
         }
+
         if (currentUser.getBirthDate() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
             tvBirthDate.setText(sdf.format(currentUser.getBirthDate().getTime()));
         } else {
             tvBirthDate.setText("Doğum tarihi bulunamadı");
@@ -182,10 +203,28 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
             this.projectList = projectList;
             mainListAdapter.setProjectList(this.projectList);
         }
+
+//                if (!App.getPrefManager().isShownMainProjectTooltip()) {
+//        new SimpleTooltip.Builder(getContext())
+//                .anchorView(rvProjectList)
+//                .text("Genel projeler burada görünür.")
+//                .gravity(Gravity.TOP)
+//                .animated(true)
+//                .transparentOverlay(true)
+//                .onDismissListener(new SimpleTooltip.OnDismissListener() {
+//                    @Override
+//                    public void onDismiss(SimpleTooltip tooltip) {
+//                            App.getPrefManager().setMainProjectTooltip(true);
+//                            showProjectTooltip();
+//                    }
+//                })
+//                .build().show();
+//        }
     }
 
     void isLoadSuccess(boolean isSuccess) {
         stopLoading();
+        cvUserProfile.setVisibility(View.VISIBLE);
         if (isSuccess) {
             rvProjectList.setVisibility(View.VISIBLE);
             tvNoProject.setVisibility(View.GONE);
@@ -257,7 +296,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
     void applyProject(View v, final Project tempProject, final int position) {
         HashMap<String, Object> application = new HashMap<>();
         application.put(currentUser.getUserID(), 0);
-        HashMap<String, Integer> applicationList = tempProject.getApplications();
+        Map<String, Integer> applicationList = tempProject.getApplications();
         if (applicationList == null) {
             applicationList = new HashMap<>();
         }
@@ -268,7 +307,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
         Snackbar.make(v, "Başvuru yapıldı", BaseTransientBottomBar.LENGTH_SHORT).setAction("İPTAL", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Integer> applicationList = tempProject.getApplications();
+                Map<String, Integer> applicationList = tempProject.getApplications();
                 if (applicationList == null) {
                     applicationList = new HashMap<>();
                 }
@@ -359,7 +398,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
         tvJobTitle.setText(user.getJobTitle());
         tvLocation.setText(user.getLocation());
 
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         tvDateValue.setText(sdf.format(project.getCreateDate().getTime()));
         int memberValue = 0;
         if (project.getMembers() != null)
@@ -452,10 +491,10 @@ public class MainFragment extends Fragment implements View.OnClickListener, Main
 
     @Override
     public void onMainListItemClick(View v, int position) {
-        Project taskListModel = projectList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("projectID", taskListModel.getProjectID());
-        bundle.putString("title", taskListModel.getProjectName());
-        Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_project_detail, bundle);
+//        Project taskListModel = projectList.get(position);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("projectID", taskListModel.getProjectID());
+//        bundle.putString("title", taskListModel.getProjectName());
+//        Navigation.findNavController(v).navigate(R.id.action_nav_main_to_nav_project_detail, bundle);
     }
 }

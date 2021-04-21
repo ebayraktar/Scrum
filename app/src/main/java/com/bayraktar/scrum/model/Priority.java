@@ -1,10 +1,11 @@
 package com.bayraktar.scrum.model;
 
 public class Priority {
-    int priorityID;
-    String priorityName;
+    private int priorityID;
+    private String priorityName;
 
     public Priority() {
+        //
     }
 
     public int getPriorityID() {

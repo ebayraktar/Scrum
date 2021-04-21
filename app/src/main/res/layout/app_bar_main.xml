@@ -25,4 +25,9 @@
     <include layout="@layout/content_main" />
 
 
+    <View
+        android:id="@+id/viewHamburger"
+        android:layout_width="56dp"
+        android:layout_height="56dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

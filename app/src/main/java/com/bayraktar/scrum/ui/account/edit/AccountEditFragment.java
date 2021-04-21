@@ -59,7 +59,7 @@ public class AccountEditFragment extends Fragment implements View.OnClickListene
 
     final Calendar deadlineCalendar = Calendar.getInstance();
     final String myFormat = "dd/MM/yyyy"; //In which you need put here
-    SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     Uri selectedImage;
 
@@ -171,12 +171,18 @@ public class AccountEditFragment extends Fragment implements View.OnClickListene
 
     boolean validateForm() {
         boolean isValid = true;
-        if (tietFullName.getText().toString().equals("")) {
-            tilFullName.setError("Boş olamaz");
-            isValid = false;
-        } else {
-            tilFullName.setError("");
-        }
+        if (tietFullName.getText() != null) {
+            if (tietFullName.getText().toString().equals("")) {
+                tilFullName.setError("Boş olamaz");
+                isValid = false;
+            } else if (tietFullName.getText().length() > 24) {
+                tilFullName.setError("Ad çok uzun");
+                isValid = false;
+
+            } else {
+                tilFullName.setError("");
+            }
+        } else isValid = false;
         return isValid;
     }
 

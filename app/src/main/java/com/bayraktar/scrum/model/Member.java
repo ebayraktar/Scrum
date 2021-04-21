@@ -3,11 +3,12 @@ package com.bayraktar.scrum.model;
 import java.util.Date;
 
 public class Member {
-    String userID;
-    Date membershipDate;
-    int authorityGroupID;
+    private String userID;
+    private Date membershipDate;
+    private int authorityGroupID;
 
     public Member() {
+        //
     }
 
     public String getUserID() {

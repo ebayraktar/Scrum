@@ -1,25 +1,22 @@
 package com.bayraktar.scrum.ui.project.detail.main;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.airbnb.lottie.LottieAnimationView;
-import com.bayraktar.scrum.BaseActivity;
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.adapter.ProjectTaskAdapter;
 import com.bayraktar.scrum.model.Task;
@@ -124,9 +121,9 @@ public class ProjectDetailMainFragment extends Fragment implements ProjectTaskAd
         firebaseService.getTask(taskID, new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     Task task = snapshot.getValue(Task.class);
-                    if(task != null) {
+                    if (task != null) {
                         if (task.getTaskName() != null && !task.getTaskName().equals("")) {
                             bundle.putString("title", task.getTaskName());
                             Navigation.findNavController(v).navigate(R.id.action_nav_project_detail_to_nav_task_detail, bundle);

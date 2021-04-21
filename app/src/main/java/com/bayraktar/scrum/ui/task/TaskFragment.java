@@ -15,7 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bayraktar.scrum.BaseActivity;
+import com.airbnb.lottie.LottieAnimationView;
 import com.bayraktar.scrum.R;
 import com.bayraktar.scrum.adapter.TaskAdapter;
 import com.bayraktar.scrum.model.Task;
@@ -31,6 +31,8 @@ public class TaskFragment extends Fragment implements TaskAdapter.OnTaskListener
     RecyclerView rvTaskList;
     TaskAdapter taskAdapter;
     List<Task> currentTaskList;
+    LottieAnimationView av_splash_animation;
+
 
     public static TaskFragment newInstance() {
         return new TaskFragment();
@@ -43,6 +45,8 @@ public class TaskFragment extends Fragment implements TaskAdapter.OnTaskListener
         mViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
         tvNoTask = view.findViewById(R.id.tvNoTask);
         rvTaskList = view.findViewById(R.id.rvTaskList);
+        av_splash_animation = view.findViewById(R.id.av_splash_animation);
+
         taskAdapter = new TaskAdapter(getContext(), this);
         rvTaskList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvTaskList.setAdapter(taskAdapter);
@@ -50,9 +54,8 @@ public class TaskFragment extends Fragment implements TaskAdapter.OnTaskListener
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-//        ((BaseActivity) getActivity()).setActionBarColor(R.color.colorPrimary);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (currentUser != null) {
             mViewModel.getTaskList(currentUser.getUserID()).observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
                 @Override
@@ -61,7 +64,6 @@ public class TaskFragment extends Fragment implements TaskAdapter.OnTaskListener
                 }
             });
         }
-        // TODO: Use the ViewModel
     }
 
     void setTaskList(List<Task> taskList) {
@@ -73,6 +75,7 @@ public class TaskFragment extends Fragment implements TaskAdapter.OnTaskListener
     }
 
     void isLoadSuccess(boolean isSuccess) {
+        av_splash_animation.setVisibility(View.GONE);
         if (isSuccess) {
             rvTaskList.setVisibility(View.VISIBLE);
             tvNoTask.setVisibility(View.GONE);
