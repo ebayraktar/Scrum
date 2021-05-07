@@ -12,33 +12,61 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_nav_main_to_nav_projects"
-            app:destination="@id/nav_projects" />
+            app:destination="@id/nav_projects"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_main_to_nav_tasks"
-            app:destination="@id/nav_tasks" />
+            app:destination="@id/nav_tasks"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_main_to_nav_account"
-            app:destination="@id/nav_account" />
+            app:destination="@id/nav_account"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_main_to_nav_login"
-            app:destination="@id/nav_login" />
+            app:destination="@id/nav_login"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_main_self"
             app:destination="@id/nav_main"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_main"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_main_to_nav_project_detail"
-            app:destination="@id/nav_project_detail" />
+            app:destination="@id/nav_project_detail"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_chart"
         android:name="com.bayraktar.scrum.ui.chart.ChartFragment"
         android:label="@string/menu_chart"
-        tools:layout="@layout/fragment_chart">
-    </fragment>
+        tools:layout="@layout/fragment_chart" />
 
     <fragment
         android:id="@+id/nav_login"
@@ -49,11 +77,21 @@
         <action
             android:id="@+id/action_nav_login_to_nav_main"
             app:destination="@id/nav_main"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_main"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_login_to_nav_register"
-            app:destination="@id/nav_register" />
+            app:destination="@id/nav_register"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
 
     </fragment>
@@ -72,11 +110,21 @@
         <action
             android:id="@+id/action_nav_register_to_nav_login"
             app:destination="@id/nav_login"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_login"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_register_to_nav_main"
             app:destination="@id/nav_main"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_main"
             app:popUpToInclusive="true" />
 
@@ -90,13 +138,28 @@
         tools:layout="@layout/fragment_project">
         <action
             android:id="@+id/action_nav_projects_to_nav_project_detail"
-            app:destination="@id/nav_project_detail" />
+            app:destination="@id/nav_project_detail"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_projects_to_nav_add_project"
-            app:destination="@id/nav_new_project" />
+            app:destination="@id/nav_new_project"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_projects_to_nav_main"
             app:destination="@id/nav_main"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_main"
             app:popUpToInclusive="true" />
     </fragment>
@@ -115,10 +178,20 @@
             app:argType="string" />
         <action
             android:id="@+id/action_nav_new_project_to_nav_projects"
-            app:destination="@id/nav_projects" />
+            app:destination="@id/nav_projects"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_new_project_to_nav_project_detail"
             app:destination="@id/nav_project_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_project_detail"
             app:popUpToInclusive="true" />
     </fragment>
@@ -136,21 +209,46 @@
             app:argType="string" />
         <action
             android:id="@+id/action_nav_project_detail_to_nav_task_detail"
-            app:destination="@id/nav_task_detail" />
+            app:destination="@id/nav_task_detail"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_project_detail_to_nav_add_task"
-            app:destination="@id/nav_new_task" />
+            app:destination="@id/nav_new_task"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_project_detail_to_nav_new_project"
-            app:destination="@id/nav_new_project" />
+            app:destination="@id/nav_new_project"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_project_detail_to_nav_projects"
             app:destination="@id/nav_projects"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_projects"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_project_detail_to_nav_project_applications"
-            app:destination="@id/nav_project_applications" />
+            app:destination="@id/nav_project_applications"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -174,10 +272,20 @@
         tools:layout="@layout/fragment_task">
         <action
             android:id="@+id/action_nav_tasks_to_nav_task_detail"
-            app:destination="@id/nav_task_detail" />
+            app:destination="@id/nav_task_detail"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_tasks_to_nav_main"
             app:destination="@id/nav_main"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_main"
             app:popUpToInclusive="true" />
     </fragment>
@@ -198,10 +306,19 @@
             app:argType="string" />
         <action
             android:id="@+id/action_nav_task_detail_to_nav_new_task"
-            app:destination="@id/nav_new_task" />
+            app:destination="@id/nav_new_task"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_task_detail_to_nav_project_detail"
             app:destination="@id/nav_project_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_project_detail"
             app:popUpToInclusive="true" />
     </fragment>
@@ -223,11 +340,19 @@
         <action
             android:id="@+id/action_nav_new_task_to_nav_project_detail"
             app:destination="@id/nav_project_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_project_detail"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_new_task_to_nav_task_detail"
             app:destination="@id/nav_task_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/nav_task_detail"
             app:popUpToInclusive="true" />
     </fragment>
@@ -246,7 +371,11 @@
         tools:layout="@layout/fragment_account">
         <action
             android:id="@+id/action_nav_account_to_nav_account_edit"
-            app:destination="@id/nav_account_edit" />
+            app:destination="@id/nav_account_edit"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -257,6 +386,10 @@
         <action
             android:id="@+id/action_fragment_account_edit_to_account"
             app:destination="@id/nav_account"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@+id/nav_account"
             app:popUpToInclusive="true" />
     </fragment>
@@ -268,10 +401,18 @@
         tools:layout="@layout/fragment_help">
         <action
             android:id="@+id/action_nav_help_to_nav_help_center"
-            app:destination="@id/nav_help_center" />
+            app:destination="@id/nav_help_center"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_help_to_nav_report_problem"
-            app:destination="@id/nav_report_problem" />
+            app:destination="@id/nav_report_problem"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -293,13 +434,25 @@
         tools:layout="@layout/fragment_about">
         <action
             android:id="@+id/action_nav_about_to_nav_terms_of_use"
-            app:destination="@id/nav_terms_of_use" />
+            app:destination="@id/nav_terms_of_use"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_about_to_nav_data_policy"
-            app:destination="@id/nav_data_policy" />
+            app:destination="@id/nav_data_policy"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_about_to_nav_open_source_libraries"
-            app:destination="@id/nav_open_source_libraries" />
+            app:destination="@id/nav_open_source_libraries"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
